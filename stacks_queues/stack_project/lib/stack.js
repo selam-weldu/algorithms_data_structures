@@ -33,6 +33,18 @@ class Stack {
         this.bottom = null;
         this.length = 0;
     }
+
+    push(val){
+
+    }
+
+    pop(){
+
+    }
+
+    size(){
+        
+    }
 }
 
 exports.Node = Node;
