@@ -124,14 +124,14 @@ class MinMaxStack {
         return temp;
     }
 
+    max() {
+        if (!this.length) return null;
+        return this.maxNode;
+    }
+
     min(){
         if(!this.length) return null;
         return this.minNode;
-    }
-        
-    max(){
-        if(!this.length) return null;
-        return this.maxNode;
     }
 
     size() {

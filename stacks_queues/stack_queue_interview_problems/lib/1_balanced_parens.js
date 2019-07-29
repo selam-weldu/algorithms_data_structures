@@ -82,8 +82,6 @@ function balancedParens(str) {
         '[' :  ']'
     };
 
-    // }, ), ]
-
     const strArray = str.split('');
     const stack = [];
     for (let i = 0; i < strArray.length; i++) {
