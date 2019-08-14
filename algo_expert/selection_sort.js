@@ -1,3 +1,4 @@
+// Time: O(n^2)
 function selectionSort(array) {
     // Write your code here.
     let start = 0
