@@ -75,6 +75,13 @@ class Trie{
         }
     }
 
+    print() {
+        let node = this.root
+        let words = [];
+        this.findAllWords(node, words);
+        return words
+    }
+
 }
 
 // -----------------------------------------
@@ -84,7 +91,9 @@ let trie = new Trie();
 
 // insert few values
 trie.insert("hello");
-trie.insert("helium");
+trie.insert("how");
+trie.insert("are");
+trie.insert("you?");
 
 // check contains method
 console.log(trie.contains("helium"));  // true
@@ -93,3 +102,6 @@ console.log(trie.contains("kickass")); // false
 // check find method
 console.log(trie.find("hel"));  // [ 'helium', 'hello' ]
 console.log(trie.find("hell")); // [ 'hello' ]
+
+//check print method
+console.log(trie.print());
