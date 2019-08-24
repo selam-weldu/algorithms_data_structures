@@ -12,8 +12,7 @@ class Node {
     // Time: O(n)
     depthFirstSearch(array) {
         // Write your code here.
-        let stack = []
-        stack.unshift(this)
+        let stack = [this]
 
         while (stack.length > 0) {
             let node = stack.pop()
