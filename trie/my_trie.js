@@ -4,6 +4,7 @@ class TrieNode{
         this.children = {};
         this.end = false;
         this.parent = null
+        this.counter = 0
     }
 
     get_word(){
@@ -11,6 +12,7 @@ class TrieNode{
         let output = []
 
         while(node.parent){
+            // output.push(node.key)
             output.unshift(node.key)
             node = node.parent
         }
@@ -33,6 +35,7 @@ class Trie{
                 node.children[str[i]].parent = node
             }
             node = node.children[str[i]]
+            node.counter ++
         }
 
         node.end = true
@@ -82,6 +85,17 @@ class Trie{
         return words
     }
 
+    frequency(prefix){
+        let node = this.root
+        for (let i = 0; i < prefix.length; i++) {
+            if(!node.children[prefix[i]]) return false
+
+            node = node.children[prefix[i]]
+        }
+
+        return node.counter
+    }
+
 }
 
 // -----------------------------------------
@@ -94,14 +108,19 @@ trie.insert("hello");
 trie.insert("how");
 trie.insert("are");
 trie.insert("you?");
+trie.insert("help")
+trie.insert("helen")
 
 // check contains method
 console.log(trie.contains("helium"));  // true
 console.log(trie.contains("kickass")); // false
 
-// check find method
+// check find method);
 console.log(trie.find("hel"));  // [ 'helium', 'hello' ]
 console.log(trie.find("hell")); // [ 'hello' ]
 
 //check print method
 console.log(trie.print());
+
+// check frequency method
+console.log(trie.frequency("hel")); // 3
