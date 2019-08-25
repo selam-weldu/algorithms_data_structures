@@ -7,11 +7,12 @@ class TrieNode{
         this.counter = 0
     }
 
-    get_word(){
-        let node = this;
-        let output = []
+    getWord(){
+        let node = this,
+            output = [];
 
         while(node.parent){
+            // to reverse all the strings in the dictionary
             // output.push(node.key)
             output.unshift(node.key)
             node = node.parent
@@ -31,69 +32,70 @@ class Trie{
 
         for (let i = 0; i < str.length; i++) {
             if(!node.children[str[i]]){
-                node.children[str[i]] = new TrieNode(str[i])
-                node.children[str[i]].parent = node
+                node.children[str[i]] = new TrieNode(str[i]);
+                node.children[str[i]].parent = node;
             }
-            node = node.children[str[i]]
-            node.counter ++
+            node = node.children[str[i]];
+            node.counter ++;
         }
 
-        node.end = true
+        node.end = true;
+        return this;
     }
 
     contains(str){
         let node = this.root;
 
         for (let i = 0; i < str.length; i++) {
-            if(!node.children[str[i]]) return false
+            if(!node.children[str[i]]) return false;
 
-            node = node.children[str[i]]
+            node = node.children[str[i]];
         }
-        return node.end
+        return node.end;
     }
 
    
     find(prefix){
-        let node = this.root;
-        let output = [];
+        let node = this.root,
+            output = [];
 
         for (let i = 0; i < prefix.length; i++) {
             if(!node.children[prefix[i]]) return output
 
-            node = node.children[prefix[i]]
+            node = node.children[prefix[i]];
         }
 
         this.findAllWords(node, output);
 
-        return output
+        return output;
     }
 
     findAllWords(node, arr) {
         if (node.end) {
-            arr.push(node.get_word())
+            arr.push(node.getWord());
         }
 
         for (let child in node.children) {
-            this.findAllWords(node.children[child], arr)
+            this.findAllWords(node.children[child], arr);
         }
     }
 
     print() {
-        let node = this.root
-        let words = [];
+        let node = this.root,
+            words = [];
         this.findAllWords(node, words);
-        return words
+        return words;
     }
 
     frequency(prefix){
         let node = this.root
         for (let i = 0; i < prefix.length; i++) {
-            if(!node.children[prefix[i]]) return false
+            if(!node.children[prefix[i]]) return 0;
 
-            node = node.children[prefix[i]]
+            node = node.children[prefix[i]];
         }
 
-        return node.counter
+        return node.counter;
     }
 
 }
