@@ -79,6 +79,35 @@ class BST {
 
         return visited
     }
+
+    DFSPreOrder() {
+        let current = this.root,
+            stack = [current],
+            visited = []
+
+        while (stack.length) {
+            current = stack.pop()
+            visited.push(current.value)
+            if (current.right) stack.push(current.right)
+            if (current.left) stack.push(current.left)
+
+        }
+        return visited
+    }
+
+    DFSPostOrder() {
+        let visited = []
+
+        function traverse(current) {
+            if (current.left) traverse(current.left)
+            if (current.right) traverse(current.right)
+            visited.push(current.value)
+        }
+
+        traverse(this.root)
+
+        return visited
+    }
 }
 
 //     10
@@ -96,3 +125,5 @@ tree.insert(20)
 tree.insert(11)
 
 console.log(tree.BFS())
+console.log(tree.DFSPreOrder())
+console.log(tree.DFSPostOrder())
