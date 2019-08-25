@@ -124,3 +124,4 @@ console.log(trie.print());
 
 // check frequency method
 console.log(trie.frequency("hel")); // 3
+console.log(trie.frequency("hellot")); // false
