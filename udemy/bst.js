@@ -1,6 +1,5 @@
 class Node {
     constructor(value) {
-
         this.value = value;
         this.left = null;
         this.right = null;
@@ -10,16 +9,13 @@ class Node {
 
 class BST {
     constructor() {
-
         this.root = null
     }
 
     // O(log n) average-case
     // O(n) worst-case | one sided tree
     insert(value) {
-
         let node = new Node(value);
-
 
         if (this.root === null) {
             this.root = node;
@@ -80,20 +76,20 @@ class BST {
         return visited
     }
 
-    DFSPreOrder() {
+    DFSPreOrder(){
         let current = this.root,
             stack = [current],
-            visited = []
+            visited = [];
 
-        while (stack.length) {
-            current = stack.pop()
+        while(stack.length){
+            current = stack.pop();
             visited.push(current.value)
-            if (current.right) stack.push(current.right)
-            if (current.left) stack.push(current.left)
-
-        }
-        return visited
+            if(current.right) stack.push(current.right)
+            if(current.left) stack.push(current.left)
+        }   
+        return visited; 
     }
+
 
     DFSPostOrder() {
         let visited = []
@@ -109,19 +105,17 @@ class BST {
         return visited
     }
 
-    DFSInOrder() {
-        let visited = []
+    DFSInOrder(){
+        let visited = [];
 
-        function traverse(current) {
-            if (current.left) traverse(current.left)
-            visited.push(current.value)
-            if (current.right) traverse(current.right)
-
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            visited.push(node.value);
+            if(node.right) traverse(node.right);
         }
+        traverse(this.root);
 
-        traverse(this.root)
-
-        return visited
+        return visited;
     }
 }
 
