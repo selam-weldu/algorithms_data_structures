@@ -108,6 +108,21 @@ class BST {
 
         return visited
     }
+
+    DFSInOrder() {
+        let visited = []
+
+        function traverse(current) {
+            if (current.left) traverse(current.left)
+            visited.push(current.value)
+            if (current.right) traverse(current.right)
+
+        }
+
+        traverse(this.root)
+
+        return visited
+    }
 }
 
 //     10
@@ -127,3 +142,4 @@ tree.insert(11)
 console.log(tree.BFS())
 console.log(tree.DFSPreOrder())
 console.log(tree.DFSPostOrder())
+console.log(tree.DFSInOrder())
