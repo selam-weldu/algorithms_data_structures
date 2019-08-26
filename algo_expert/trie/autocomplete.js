@@ -13,77 +13,82 @@ class TrieNode {
     }
 }
 
-class AutocompleteSystem{
-    constructor(sentences, times){
+class AutocompleteSystem {
+    constructor(sentences, times) {
         this.root = new TrieNode(null);
-        this.keyword = ""
+        //input data needs to persist
+        this.keyword = "";
+        this.insert(sentences, times);
+    }
 
+    insert(sentences, times){
         for (let i = 0; i < sentences.length; i++) {
             this.add(sentences[i], times[i])
         }
     }
 
-    add(sentence, hot){
-        let p = this.root;
+    add(sentence, hot) {
+        let current = this.root;
 
         for (let i = 0; i < sentence.length; i++) {
             let c = sentence[i];
-            if (!p.children[c]) {
-                p.children[c] = new TrieNode(c)
+            if (!current.children[c]) {
+                current.children[c] = new TrieNode(c)
             }
-            p = p.children[c];
+            current = current.children[c];
         }
-            p.end = true;
-            p.data = sentence;
-            p.rank += hot;
+        current.end = true;
+        current.data = sentence;
+        current.rank += hot;
 
         return this;
     }
 
-    findAllWords(root,ret){
-        
 
-        if(root){
-            if(root.end){
-                ret.push({rank: root.rank, data: root.data})
-            }
-
-            for (let child in root.children) {
-                this.findAllWords(root.children[child], ret)
-            }
-        }
-
-    }
-
-    search(sentence){
-        let p = this.root;
+    search(sentence) {
+        let current = this.root;
         let output = []
 
         for (let i = 0; i < sentence.length; i++) {
             let c = sentence[i];
-            if(!p.children[c]){
+            if (!current.children[c]) {
                 return []
             }
-            p = p.children[c]
+            current = current.children[c]
         }
 
-        this.findAllWords(p,output)
+        this.findAllWords(current, output)
+
         return output
     }
 
-    input(c){
-        let results = [];
+    findAllWords(node, arr) {
+        if (node.end) {
+            // store both rank and data
+            //rank needed for sorting and data for output
+            arr.push({ rank: node.rank, data: node.data })
+        }
 
-        if(c != "#"){
+        for (let child in node.children) {
+            this.findAllWords(node.children[child], arr)
+        }
+    }
+
+
+    input(c) {
+        let results = [];
+     
+        if (c != "#") {
+            // add c to keyword, because it needs to persist
             this.keyword += c;
             results = this.search(this.keyword)
-        } else{
+        } else {
             this.add(this.keyword, 1)
+            // clear keyword, because sentence has been added and all inputs are now new
             this.keyword = ""
         }
 
-        // testing
-        // return results;
+
         results.sort((a, b) => {
             if (a.rank === b.rank) {
                 return a.data < b.data ? -1 : 1;
@@ -93,9 +98,11 @@ class AutocompleteSystem{
             }
             return 1;
         })
+
         if (results.length > 3) {
             results = results.slice(0, 3);
         }
+
         return results.map(result => result.data);
     }
 }
