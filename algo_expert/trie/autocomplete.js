@@ -100,8 +100,13 @@ class AutocompleteSystem{
     }
 }
 
+
+////// testing /////
 let sentences = ["i love you", "island", "iroman", "i love leetcode"];
 let times = [5, 3, 2, 2]
 
 let auto = new AutocompleteSystem(sentences, times);
 console.log(auto.input(["i"]))
+console.log(auto.input([" "]))
+console.log(auto.input(["a"]))
+console.log(auto.input(["#"]))
