@@ -105,16 +105,17 @@ class BST {
         return visited
     }
 
+   
     DFSInOrder(){
-        let visited = [];
+        let visited = []
 
         function traverse(node){
             if(node.left) traverse(node.left);
-            visited.push(node.value);
-            if(node.right) traverse(node.right);
+            visited.push(node.value)
+            if(node.right) traverse(node.right)
         }
-        traverse(this.root);
 
+        traverse(this.root);
         return visited;
     }
 }

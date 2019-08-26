@@ -1,47 +1,37 @@
-class TrieNode{
-    constructor(key){
-        this.key = key;
-        this.children = {};
-        this.parent = null;
-        this.end = false
-    }
-}
-
-class SuffixTrie{
-    constructor(){
-        this.root = new TrieNode(null);
+class SuffixTrie {
+    constructor(string) {
+        this.root = {};
+        this.endSymbol = "*";
+        this.populateSuffixTrieFrom(string);
     }
 
-    populateSuffixTrieFrom(str){
-        for (let i = 0; i < str.length; i++) {
-          this.insert(str.slice(i))  
+    populateSuffixTrieFrom(string) {
+        for (let i = 0; i < string.length; i++) {
+            this.insert(string.slice(i))
         }
     }
 
-    insert(str){
-        let current = this.root;
-        for (let i = 0; i < str.length; i++) {
-            if(!current.children[str[i]]){
-                current.children[str[i]] = new TrieNode(str[i])
-                current.children[str[i]].parent = current
+    insert(string) {
+        let node = this.root
+
+        for (let i = 0; i < string.length; i++) {
+            if (!node[string[i]]) {
+                node[string[i]] = {}
             }
-
-            current = current.children[str[i]]
+            node = node[string[i]]
         }
-        current.end = true
+        node[this.endSymbol] = true
     }
 
-    contains(str){
-        let current = this.root;
+    contains(string) {
+        let node = this.root
 
-        for (let i = 0; i < str.length; i++) {
-            if(!current.children[str[i]]) return false
-            current = current.children[str[i]]
+        for (let i = 0; i < string.length; i++) {
+            if (!node[string[i]]) return false
+
+            node = node[string[i]]
         }
 
-        return current.end
+        return node[this.endSymbol]
     }
-    
-
 }
-
