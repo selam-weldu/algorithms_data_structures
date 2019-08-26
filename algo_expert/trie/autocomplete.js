@@ -19,11 +19,11 @@ class AutocompleteSystem{
         this.keyword = ""
 
         for (let i = 0; i < sentences.length; i++) {
-            this.addRecord(sentences[i], times[i])
+            this.add(sentences[i], times[i])
         }
     }
 
-    addRecord(sentence, hot){
+    add(sentence, hot){
         let p = this.root;
 
         for (let i = 0; i < sentence.length; i++) {
@@ -40,7 +40,7 @@ class AutocompleteSystem{
         return this;
     }
 
-    dfs(root,ret){
+    findAllWords(root,ret){
         
 
         if(root){
@@ -49,7 +49,7 @@ class AutocompleteSystem{
             }
 
             for (let child in root.children) {
-                this.dfs(root.children[child], ret)
+                this.findAllWords(root.children[child], ret)
             }
         }
 
@@ -67,7 +67,7 @@ class AutocompleteSystem{
             p = p.children[c]
         }
 
-        this.dfs(p,output)
+        this.findAllWords(p,output)
         return output
     }
 
@@ -78,7 +78,7 @@ class AutocompleteSystem{
             this.keyword += c;
             results = this.search(this.keyword)
         } else{
-            this.addRecord(this.keyword, 1)
+            this.add(this.keyword, 1)
             this.keyword = ""
         }
 
