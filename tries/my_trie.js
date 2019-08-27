@@ -3,8 +3,8 @@ class TrieNode{
         this.key = key;
         this.children = {};
         this.end = false;
-        this.parent = null
-        this.counter = 0
+        this.parent = null;
+        this.counter = 0;
     }
 
     getWord(){
