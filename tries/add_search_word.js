@@ -15,7 +15,7 @@ class TrieNode {
         this.key = key;
         this.children = {};
         this.end = false;
-        this.parent = null
+        this.parent = null;
     }
 }
 

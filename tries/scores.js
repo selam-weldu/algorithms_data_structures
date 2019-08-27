@@ -46,9 +46,8 @@ class Trie {
             if(!current.children[word[i]]){
                 return 0
             }
-            current = current.children[word[i]]
-                
-            }
+            current = current.children[word[i]]        
+        }
 
         this.findAllWords(current, output)
 
@@ -78,7 +77,8 @@ function getAutocompleteScores(documentTitles, documentBodies, queries) {
         output.push(trie.find(query));
     })
 
-    console.log(output);
+    // console.log(output);
+    return output
 }
 
 ///////////////////////////////
@@ -87,5 +87,5 @@ let titles = ["AAA", "BBB", "AA", "CDD", "CDD"];
 let bodies = ["AAA", "CCD", "CCC", "DDD"]
 
 
-getAutocompleteScores(titles,bodies,["A", "C", "CC", "X", "BB"]);
+console.log(getAutocompleteScores(titles, bodies, ["A", "C", "CC", "X", "BB"]));
 // [ 11, 20, 1, 0, 10 ]
