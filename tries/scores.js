@@ -39,8 +39,8 @@ class Trie {
     }
 
     find(word) {
-        let output = []
         let current = this.root;
+        let output = []
 
         for (let i = 0; i < word.length; i++) {
             if(!current.children[word[i]]){
@@ -77,7 +77,6 @@ function getAutocompleteScores(documentTitles, documentBodies, queries) {
         output.push(trie.find(query));
     })
 
-    // console.log(output);
     return output
 }
 
