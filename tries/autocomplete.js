@@ -16,7 +16,7 @@ class TrieNode {
 class AutocompleteSystem {
     constructor(sentences, times) {
         this.root = new TrieNode(null);
-        //input data needs to persist
+        //search input needs to persist
         this.keyword = "";
         this.insert(sentences, times);
     }
@@ -31,11 +31,10 @@ class AutocompleteSystem {
         let current = this.root;
 
         for (let i = 0; i < sentence.length; i++) {
-            let c = sentence[i];
-            if (!current.children[c]) {
-                current.children[c] = new TrieNode(c)
+            if (!current.children[sentence[i]]) {
+                current.children[sentence[i]] = new TrieNode(sentence[i])
             }
-            current = current.children[c];
+            current = current.children[sentence[i]];
         }
         current.end = true;
         current.data = sentence;
@@ -47,19 +46,18 @@ class AutocompleteSystem {
 
     search(sentence) {
         let current = this.root;
-        let output = []
+        let output = [];
 
         for (let i = 0; i < sentence.length; i++) {
-            let c = sentence[i];
-            if (!current.children[c]) {
-                return []
+            if (!current.children[sentence[i]]) {
+                return [];
             }
-            current = current.children[c]
+            current = current.children[sentence[i]];
         }
 
-        this.findAllWords(current, output)
+        this.findAllWords(current, output);
 
-        return output
+        return output;
     }
 
     findAllWords(node, arr) {
@@ -83,20 +81,21 @@ class AutocompleteSystem {
             this.keyword += c;
             results = this.search(this.keyword)
         } else {
+            // this.keyword includes all chars typed in execpt #
             this.add(this.keyword, 1)
             // clear keyword, because sentence has been added and all inputs are now new
-            this.keyword = ""
+            this.keyword = "";
         }
 
 
         results.sort((a, b) => {
-            if (a.rank === b.rank) {
-                return a.data < b.data ? -1 : 1;
-            }
             if (a.rank > b.rank) {
                 return -1;
+            } else if(a.rank < b.rank) {
+                return 1;
+            } else {
+                return a.data < b.data ? -1 : 1;
             }
-            return 1;
         })
 
         if (results.length > 3) {

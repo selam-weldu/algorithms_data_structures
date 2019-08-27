@@ -46,6 +46,7 @@ class Trie {
                 current.children[str[i]].parent = current;
             }
             current = current.children[str[i]];
+            // track num of string that include current node key
             current.count += 1;
         }
         current.end = true

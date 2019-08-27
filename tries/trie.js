@@ -1,3 +1,4 @@
+// Author: Terence Pae(https://github.com/tpae)
 
 // we start with the TrieNode
 function TrieNode(key) {
