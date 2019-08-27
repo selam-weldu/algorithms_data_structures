@@ -17,18 +17,6 @@ class TrieNode {
         this.end = false;
         this.parent = null
     }
-
-    getWord() {
-        let node = this,
-            output = [];
-
-        while (node.parent) {
-            output.unshift(node.key)
-            node = node.parent
-        }
-
-        return output.join('')
-    }
 }
 
 class wordDictionary {
@@ -49,43 +37,6 @@ class wordDictionary {
 
         node.end = true;
         return this;
-    }
-
-    contains(str) {
-        let node = this.root;
-
-        for (let i = 0; i < str.length; i++) {
-            if (!node.children[str[i]]) return false;
-
-            node = node.children[str[i]];
-        }
-        return node.end;
-    }
-
-
-    find(prefix) {
-        let node = this.root,
-            output = [];
-
-        for (let i = 0; i < prefix.length; i++) {
-            if (!node.children[prefix[i]]) return output
-
-            node = node.children[prefix[i]];
-        }
-
-        this.findAllWords(node, output);
-
-        return output;
-    }
-
-    findAllWords(node, arr) {
-        if (node.end) {
-            arr.push(node.getWord());
-        }
-
-        for (let child in node.children) {
-            this.findAllWords(node.children[child], arr);
-        }
     }
 
     search(word){
