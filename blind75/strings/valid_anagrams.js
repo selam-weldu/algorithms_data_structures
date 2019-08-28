@@ -7,6 +7,9 @@ var isAnagram = function (s, t) {
     // if yes, subtract 1 from value
     // outside of loop, return true if all values in hashmap are 0
    
+    if(s.length !== t.length){
+        return false;
+    }
     let hashMap = {};
 
     for(let char of s){
