@@ -27,8 +27,6 @@ const isAnagram = function (s, t) {
         }
     }
 
-    let count = Object.values(hashMap);
-
-    return count.every(ele => ele === 0);
+    return Object.values(hashMap).every(ele => ele === 0);
 
 };
