@@ -1,4 +1,7 @@
-var isAnagram = function (s, t) {
+// O(n) time
+// O(n) space
+// Given two strings s and t, write a function to determine if t is an anagram of s.
+const isAnagram = function (s, t) {
     // init hashMap
     // add chars of first string into hashMap char as key and count as value
     // iterate over second string
