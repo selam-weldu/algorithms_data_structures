@@ -1,7 +1,7 @@
 // O(n) time
 // O(n) space
 // Given two strings s and t, write a function to determine if t is an anagram of s.
-const isAnagram = function (s, t) {
+const isAnagram = function (str1, str2) {
     // init hashMap
     // add chars of first string into hashMap char as key and count as value
     // iterate over second string
@@ -10,16 +10,16 @@ const isAnagram = function (s, t) {
     // if yes, subtract 1 from value
     // outside of loop, return true if all values in hashmap are 0
    
-    if(s.length !== t.length){
+    if(str1.length !== str2.length){
         return false;
     }
     let hashMap = {};
 
-    for(let char of s){
+    for(let char of str1){
         hashMap[char] = ++hashMap[char] || 1;
     }
 
-    for(let char of t){
+    for(let char of str2){
         if(!hashMap[char]){
             // if we have value as 0 and we hit this condition it means the char
             // has a different count in the each string
