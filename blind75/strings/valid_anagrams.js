@@ -20,13 +20,25 @@ const isAnagram = function (s, t) {
     }
 
     for(let char of t){
-        if(char in hashMap){
-            hashMap[char] -= 1;
-        } else {
+        if(!hashMap[char]){
+            // if we have value as 0 and we hit this condition it means the char
+            // has a different count in the each string
             return false
+        } else {
+            hashMap[char] -= 1;
         }
     }
 
-    return Object.values(hashMap).every(ele => ele === 0);
+    return true
+
+    // for(let char of t){
+    //     if(char in hashMap){
+    //         hashMap[char] -= 1;
+    //     } else {
+    //         return false
+    //     }
+    // }
+
+    // return Object.values(hashMap).every(ele => ele === 0);
 
 };
