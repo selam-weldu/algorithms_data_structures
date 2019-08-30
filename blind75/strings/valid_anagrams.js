@@ -20,9 +20,9 @@ const isAnagram = function (str1, str2) {
     }
 
     for(let char of str2){
+        // if we have value as 0 and we hit this condition it means the char
+        // has a different count in the each string
         if(!hashMap[char]){
-            // if we have value as 0 and we hit this condition it means the char
-            // has a different count in the each string
             return false
         } else {
             hashMap[char] -= 1;
