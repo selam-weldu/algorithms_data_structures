@@ -6,16 +6,13 @@ function maxSubArray(arr){
     // update maxSum accordingly
     // return maxSum
 
-    if (arr.length < num) return null;
-    
-    let tempSum = 0,
-        maxSum = -Infinity;
+    if (arr.length === 0) return null;
 
-    for(let num of arr){
-        tempSum = Math.max(tempSum + num, num);
-        maxSum = Math.max(maxSum,tempSum);
+    let runningSum = 0, maxSum = -Infinity;
+    for (let num of nums) {
+        runningSum = Math.max(runningSum + num, num);
+        maxSum = Math.max(runningSum, maxSum);
     }
-
     return maxSum;
 }
 
