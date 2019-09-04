@@ -1,3 +1,5 @@
+// sliding window pattern is useful for keeping track of data in an array/string
+
 const maxSubarray = (arr,num) => {
     // init temp and maxSum
     // calcu sum of first num numbers
