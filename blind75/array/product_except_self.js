@@ -1,3 +1,4 @@
+// O(n) space and Time
 const productExceptSelf = function (nums) {
     let left = [], right = [], answer = [];
 
