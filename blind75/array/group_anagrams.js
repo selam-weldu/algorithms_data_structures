@@ -4,17 +4,18 @@ const groupAnagrams = function (strs) {
     // if it's not in map, make it a key and it's value []
     // if in map push str value array
     // return values of map
-    
-    let map = {};
+
+    let hashMap = {};
 
     for (str of strs) {
-        let k = str.split('').sort().join('');
+        let s = str.split('').sort().join('')
 
-        if (!map[k]) {
-            map[k] = [];
+        if (!hashMap[s]) {
+            hashMap[s] = [str];
+        } else {
+            hashMap[s].push(str);
         }
-        map[k].push(str);
     }
 
-    return Object.values(map);
+    return Object.values(hashMap);
 };
