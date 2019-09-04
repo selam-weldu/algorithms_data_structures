@@ -8,12 +8,12 @@ const groupAnagrams = function (strs) {
     let map = {};
 
     for (str of strs) {
-        let s = str.split('').sort().join('')
+        let key = str.split('').sort().join('')
 
-        if (s in map) {
+        if (key in map) {
             map[s].push(str);
         } else {
-            map[s] = [str];
+            map[key] = [str];
         }
     }
 
