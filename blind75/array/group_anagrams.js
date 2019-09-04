@@ -5,17 +5,17 @@ const groupAnagrams = function (strs) {
     // if in map push str value array
     // return values of map
 
-    let hashMap = {};
+    let map = {};
 
     for (str of strs) {
         let s = str.split('').sort().join('')
 
-        if (!hashMap[s]) {
-            hashMap[s] = [str];
+        if (s in map) {
+            map[s].push(str);
         } else {
-            hashMap[s].push(str);
+            map[s] = [str];
         }
     }
 
-    return Object.values(hashMap);
+    return Object.values(map);
 };
