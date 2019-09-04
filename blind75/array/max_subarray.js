@@ -6,6 +6,8 @@ function maxSubArray(arr){
     // update maxSum accordingly
     // return maxSum
 
+    if (arr.length < num) return null;
+    
     let tempSum = 0,
         maxSum = -Infinity;
 
