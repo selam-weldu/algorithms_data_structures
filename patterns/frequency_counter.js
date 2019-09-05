@@ -59,3 +59,21 @@ function sameFrequency(int1, int2) {
     }
     return true;
 }
+
+// checks if there are duplicates
+function areThereDuplicates(...args) {
+    //   add elements to hash,
+    // if element already in hash, return false
+    // return true at the end
+
+    let map = {};
+
+    for (let ele of args) {
+        if (map[ele]) {
+            return true;
+        } else {
+            map[ele] = true;
+        }
+    }
+    return false
+}
