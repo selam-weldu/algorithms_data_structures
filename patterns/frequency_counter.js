@@ -62,6 +62,7 @@ function sameFrequency(int1, int2) {
 }
 
 // checks if there are duplicates
+// Time and Space: O(n)
 function areThereDuplicates(...args) {
     //   add elements to hash,
     // if element already in hash, return false
@@ -77,4 +78,25 @@ function areThereDuplicates(...args) {
         }
     }
     return false
+}
+
+// Time: O(nlogn)
+// space: O(1)
+function areThereDuplicates(...args){
+    args.sort((a,b) => a - b);
+
+    for (let i = 0; i < args.length - 1; i++) {
+        let j = i + 1;
+
+        if(args[i] === args[j]){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// one-liner
+function areThereDuplicates() {
+    return new Set(arguments).size !== arguments.length;
 }
