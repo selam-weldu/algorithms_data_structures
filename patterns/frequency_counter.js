@@ -41,6 +41,7 @@ function frequencyCounter(arr1, arr2){
 
 // Given two positive integers, find out if the numbers have the same frequency of digits
 function sameFrequency(int1, int2) {
+    if(int1.length !== int2.length) return false
     let frequencyCounter = {};
 
     int1 = String(int1);
