@@ -92,3 +92,29 @@ function averagePair(arr, target) {
     }
     return false;
 }
+
+// Time: O(n), space: O(1)
+function isSubsequence(str1, str2) {
+    // if str2 < str1 return false
+    // two pointers, for each string
+    // if the chars are equal increament both pointers, else
+    // increment the second pointer
+    // if end of second string inside loop return false
+    // if break out of loop return true
+
+    if (str1.length > str2.length) return false;
+
+    let i = 0;
+    let j = 0;
+    while (i < str1.length) {
+        if (j === str2.length) return false;
+
+        if (str1[i] === str2[j]) {
+            ++i;
+            ++j;
+        } else {
+            ++j;
+        }
+    }
+    return true
+}
