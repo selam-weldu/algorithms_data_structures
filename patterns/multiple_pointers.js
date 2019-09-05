@@ -68,3 +68,27 @@ function countUniqueValues2(arr){
 }
 
 // console.log(countUniqueValues2([1,2,3,4,4,7,7,7,12,12,13]));
+
+// Time: O(n), space: O(1)
+function averagePair(arr, target) {
+    //   if empty or one element array return false
+    // two pointers at start and end
+    // get average, if it's too small ++left, else --right
+    // if equal return true
+
+    if (arr.length <= 1) return false;
+
+    let left = 0;
+    let right = arr.length - 1;
+    while (left < right) {
+        let currAvg = (arr[left] + arr[right]) / 2;
+        if (currAvg === target) {
+            return true;
+        } else if (currAvg < target) {
+            ++left;
+        } else {
+            --right;
+        }
+    }
+    return false;
+}
