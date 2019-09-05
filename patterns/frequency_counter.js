@@ -1,3 +1,5 @@
+// Given two arrays, does the second array contain the square of only the numbers
+// in array one.
 function frequencyCounter(arr1, arr2){
     // haspMap both arrarys, values as K and frequency as V, use two separate loops
     // loop over either hashMap
@@ -35,4 +37,25 @@ function frequencyCounter(arr1, arr2){
     return true
 }
 
-console.log(frequencyCounter([1,2,4],[1,4]));
+// console.log(frequencyCounter([1,2,4],[1,4]));
+
+// Given two positive integers, find out if the numbers have the same frequency of digits
+function sameFrequency(int1, int2) {
+    let frequencyCounter = {};
+
+    int1 = String(int1);
+    int2 = String(int2);
+
+    for (let int of int1) {
+        frequencyCounter[int] = ++frequencyCounter[int] || 1;
+    }
+
+    for (let int of int2) {
+        if (!frequencyCounter[int]) {
+            return false;
+        } else {
+            frequencyCounter[int] -= 1;
+        }
+    }
+    return true;
+}
