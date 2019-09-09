@@ -1,5 +1,7 @@
 // O(n) Space and Time
 const lengthOfLongestSubstring = function (s) {
+
+    if(s.length <= 1) return s.length;
     let left = 0, 
         maxLength = 0,
         char = '', 
