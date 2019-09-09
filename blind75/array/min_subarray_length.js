@@ -1,8 +1,13 @@
+
+// returns the minLength of a contiguous subarray which the sum is greater than or 
+// equal to the integer.
+// Eg: msa([2,3,1,2,4,3],7) //2 b'c [4,3] is the smallest subarr
+// msa([1,4,16,22,5,7,8,9,10],95) // 0
 function minSubArrayLen(nums, sum) {
-    let total = 0;
-    let start = 0;
-    let end = 0;
-    let minLen = Infinity;
+    let total = 0,
+        start = 0,
+        end = 0,
+        minLen = Infinity;
 
     while (start < nums.length) {
         // if current window doesn't add up to the given sum then 
@@ -18,7 +23,8 @@ function minSubArrayLen(nums, sum) {
             total -= nums[start];
             start++;
         }
-        // current total less than required total but we reach the end, need this or else we'll be in an infinite loop 
+        // current total less than required total but we reach the end, 
+        // need this or else we'll be in an infinite loop 
         else {
             break;
         }
