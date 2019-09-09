@@ -1,3 +1,4 @@
+// O(n) Space and Time
 const lengthOfLongestSubstring = function (s) {
     let left = 0, 
         maxLength = 0,
@@ -11,6 +12,7 @@ const lengthOfLongestSubstring = function (s) {
         }
 
         map[char] = right;
+        // + 1 accounts for index starting at 0
         maxLength = Math.max(maxLength, (right - left + 1));
     }
 
