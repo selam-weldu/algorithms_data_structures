@@ -6,5 +6,5 @@ function isPalindrome(str) {
 
     if (first !== last) return false;
 
-    return isPalindrome(str.slice(1, (str.length - 1)));
+    return isPalindrome(str.slice(1, str.length - 1));
 }
