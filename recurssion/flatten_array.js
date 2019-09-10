@@ -1,5 +1,6 @@
 function flatten(arr) {
     let flattened = [];
+
     function _flatten(array) {
         if (!array.length) return;
 
@@ -11,5 +12,6 @@ function flatten(arr) {
         _flatten(array.slice(1))
     }
     _flatten(arr)
+    
     return flattened;
 }
