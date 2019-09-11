@@ -11,5 +11,5 @@ function productSum(array, multiplier = 1) {
             sum += ele
         }
     }
-    return sum * m;
+    return sum * multiplier;
 }
