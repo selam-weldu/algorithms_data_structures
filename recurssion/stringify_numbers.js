@@ -1,32 +1,44 @@
-// function stringifyNumbers(obj) {
-//     var newObj = {};
-//     for (var key in obj) {
-//         if (typeof obj[key] === 'number') {
-//             newObj[key] = obj[key].toString();
-//         } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-//             newObj[key] = stringifyNumbers(obj[key]);
-//         } else {
-//             newObj[key] = obj[key];
-//         }
-//     }
-//     return newObj;
-// }
+function stringifyNumbers(map) {
+    let newObj = {};
 
-// function stringifyNumbers(map){
-//     let newObj = {};
+    for (let key in map) {
+        if (typeof map[key] === 'object' && !Array.isArray(map[key])) {
+            newObj[key] = stringifyNumbers(map[key]);
+        } else if (typeof map[key] === 'number') {
+            newObj[key] = map[key].toString()
+        } else {
+            newObj[key] = map[key]
+        }
+    }
+    return newObj;
+}
 
-//     function _stringify(obj){
-//         for(let key in obj){
-//             if(typeof obj[key] === 'object' && !Array.isArray(obj[key])){
-//                 newObj[key] = _stringify(obj[key]);
-//             } else if(typeof obj[key] === 'number'){
-//                 newObj[key] = obj[key].toString()
-//             } else{
-//                 newObj[key] = obj[key]
-//             }
-//         }
-//         return
-//     }
-//     _stringify(map)
-//     return newObj;
-// }
+
+let obj = {
+    num: 1,
+    test: [],
+    data: {
+        val: 4,
+        info: {
+            isRight: true,
+            random: 66
+        }
+    }
+}
+
+
+console.log(stringifyNumbers(obj));
+
+/*
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+*/
