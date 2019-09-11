@@ -1,3 +1,4 @@
+// helper function method
 function collectStrings(obj) {
     // iterate obj and if value is string add to arr
     // if it's an object call helper function again
@@ -15,5 +16,19 @@ function collectStrings(obj) {
     }
 
     _collect(obj)
+    return arr;
+}
+
+// pure recurssion
+function collectStrings(obj){
+    let arr = [];
+
+    for(let key in obj){
+        if(typeof obj[key] === 'object' && !Array.isArray(obj[key])){
+            arr = arr.concat(collectStrings(obj[key]))
+        } else if(typeof obj[key] === 'string'){
+            arr.push(obj[key])
+        }
+    }
     return arr;
 }
