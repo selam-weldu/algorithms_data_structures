@@ -1,3 +1,5 @@
+// Time:
+// Space: 
 function getPermutations(arr){
     // return 2D array with permutations
     // base case: if arr is empty and there is a curr permutation
@@ -5,6 +7,7 @@ function getPermutations(arr){
     // for each ele in arr, make a new arr by removing the ele from arr
     // add the removed element to the new Perm
     // call helper function again with newArr, newPerm and perms
+    
     let permutations = [];
     
     function _getPermutations(arr, currPerm, permutations){
