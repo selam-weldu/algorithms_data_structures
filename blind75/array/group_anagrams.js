@@ -11,7 +11,7 @@ const groupAnagrams = function (strs) {
         let key = str.split('').sort().join('')
 
         if (key in map) {
-            map[s].push(str);
+            map[key].push(str);
         } else {
             map[key] = [str];
         }
