@@ -129,20 +129,29 @@ class SinglyLinkedList{
     }
 
     reverse(){
+        // switch head and tail
+        // set current to head, because we can only go in one direction
+        // init next and prev, prev is the oldNext and next is the oldPrev
+        // since we are starting from tail, it needs to point to null, so set next to null
+        // loop through the length of list
+        // in each iteration, assign prev first so we don't loose that reference
+        // connect node to new next
+        // reassign current and next
+
         let current = this.head;
         this.head = this.tail;
         this.tail = current;
 
-        let newNext = null;
-        let newPrev;
+        let newNext = null,
+            prev;
 
-        for (let i = 0; i < this.length; i++) {
-            newPrev = current.next;
+        while(current){
+            prev = current.next;
             current.next = newNext;
 
             newNext = current;
-            current = newPrev;
-        }
+            current = prev;
+        }   
 
         return this;
     }
