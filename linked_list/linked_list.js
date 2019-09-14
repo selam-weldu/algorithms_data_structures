@@ -13,6 +13,7 @@ class SinglyLinkedList{
         this.length = 0;
     }
 
+    // O(1)
     push(val){
         let newNode = new Node(val);
 
@@ -28,26 +29,29 @@ class SinglyLinkedList{
         return this;
     }
 
+    // O(n), n is this.length - 1
     pop(){
         if(!this.head) return undefined;
 
-        let removedNode = this.head;
+        let removed = this.head;
         if(this.head === this.tail){
             this.head = null;
             this.tail = null;
         }else{
-            let newTail = removedNode;
-            while(removedNode.next){
-                newTail = removedNode;
-                removedNode = removedNode.next;
+            let newTail = this.head;
+            while(removed.next){
+                newTail = removed;
+                removed = removed.next;
             }
             newTail.next = null;
             this.tail = newTail;
         }
+
         --this.length;
-        return removedNode;
+        return removed;
     }
 
+    // O(1)
     shift(){
         if(!this.head) return undefined;
 
@@ -62,6 +66,7 @@ class SinglyLinkedList{
         return removedNode;
     }
 
+    // O(1)
     unshift(val){
         let newNode = new Node(val);
 
@@ -77,13 +82,16 @@ class SinglyLinkedList{
         return this;
     }
 
-    get(index){
-        if(index < 0 || index >= this.length) return undefined;
+    get(idx){
+        if(idx < 0 || idx >= this.length) return undefined;
         if(!this.head) return undefined;
+        if(idx === 0) return this.head;
+        if(idx === this.length - 1) return this.tail;
+
         let current = this.head;
         let counter = 0;
 
-        while(counter != index){
+        while(counter != idx){
             current = current.next;
             ++counter;
         }
@@ -91,8 +99,9 @@ class SinglyLinkedList{
         return current;
     }
 
-    set(index,value){
-        let oldNode = get(index);
+    set(idx,value){
+        // don't need to check for edge cases, because get() checks
+        let oldNode = this.get(idx);
 
         if(oldNode){
             oldNode.value = value;
@@ -101,24 +110,26 @@ class SinglyLinkedList{
         return false;
     }
 
-    insert(index,value){
-        if(index < 0 || index > this.length) return false;
-        if(index === 0) return !!this.unshift(value);
-        if(index === this.length) return !!this.push(value);
+    insert(idx,value){
+        if(idx < 0 || idx > this.length) return false;
+        if(idx === 0) return !!this.unshift(value);
+        if(idx === this.length) return !!this.push(value);
 
         let newNode = new Node(value);
-        let prevNode = this.get(index - 1);
-        newNode.next = prevNode.next;
+        let prevNode = this.get(idx - 1);
+        let newNext = prevNode.next;
+        
         prevNode.next = newNode;
+        newNode.next = newNext;
 
         ++this.length;
         return true;
     }
 
-    remove(index){
-        if(index < 0 || index >= this.length) return undefined;
-        if(index === 0) return this.shift();
-        if(index === this.length - 1) return this.pop();
+    remove(idx){
+        if(idx < 0 || idx >= this.length) return undefined;
+        if(idx === 0) return this.shift();
+        if(idx === this.length - 1) return this.pop();
 
         let prevNode = this.get(index - 1);
         let removedNode = prevNode.next;
