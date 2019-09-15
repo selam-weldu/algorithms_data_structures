@@ -9,13 +9,19 @@ function hasCycle(head) {
     let first = head;
     let second = head.next;
 
-    while (second && second.next) {
-        if (first === second) return true
+    while(first !== second){
         first = first.next;
+        if(!second || !second.next) return false;
         second = second.next.next;
     }
 
-    return false;
+    // while (second && second.next) {
+    //     if (first === second) return true
+    //     first = first.next;
+    //     second = second.next.next;
+    // }
+
+    return true;
 }
 
 // short and sweet
