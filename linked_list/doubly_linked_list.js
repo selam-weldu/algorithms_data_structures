@@ -1,5 +1,7 @@
 // insertion and removal O(1)
 // Searching and access O(N), searching is O(N/2) but that's O(N)
+// better than singlyLinkedLists in some aspects but more flexibilty
+// comes with the cost of more memory
 
 class Node{
     constructor(val){
