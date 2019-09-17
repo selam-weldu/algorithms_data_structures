@@ -1,3 +1,6 @@
+// insertion O(1)
+// removal O(N) for pop and O(1) for shift
+// searching and access O(N)
 class Node{
     constructor(value){
         this.value = value;
