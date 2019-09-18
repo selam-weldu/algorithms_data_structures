@@ -11,8 +11,8 @@
  *
  */
 function sortedInsert(head, data) {
-    // if empty or one node return head
-    // before first element, after last element
+    // if empty or one node lists are already sorted
+    // edges: before first element, after last element
     // loop until list is empty or a node is larger than data
     // check which case ended the loop,
     // it's because a larger number was found
@@ -20,6 +20,7 @@ function sortedInsert(head, data) {
     // else, push node to the end
 
     let newNode = new DoublyLinkedListNode(data);
+    
     if (!head) {
         head = newNode;
         return head;
@@ -31,14 +32,13 @@ function sortedInsert(head, data) {
                     newNode.next = head;
                     head.prev = newNode;
                     head = newNode;
-                    return head;
                 } else {
                     newNode.next = current;
                     current.prev.next = newNode;
                     newNode.prev = current.prev.next;
                     current.prev = newNode;
-                    return head;
                 }
+                return head;
             }
 
             if (current.next == null) {
