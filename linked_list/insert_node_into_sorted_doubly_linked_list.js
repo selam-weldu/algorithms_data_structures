@@ -1,5 +1,4 @@
 // Complete the sortedInsert function below.
-
 /*
  * For your reference:
  *
