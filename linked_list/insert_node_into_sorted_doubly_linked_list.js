@@ -23,30 +23,30 @@ function sortedInsert(head, data) {
     if (!head) {
         head = newNode;
         return head;
-    } else {
-        let current = head;
-        while (current) {
-            if (current.data > data) {
-                if (current === head) {
-                    newNode.next = head;
-                    head.prev = newNode;
-                    head = newNode;
-                } else {
-                    newNode.next = current;
-                    current.prev.next = newNode;
-                    newNode.prev = current.prev.next;
-                    current.prev = newNode;
-                }
-                return head;
+    } 
+    
+    let current = head;
+    while (current) {
+        if (current.data > data) {
+            if (current === head) {
+                newNode.next = head;
+                head.prev = newNode;
+                head = newNode;
+            } else {
+                newNode.next = current;
+                current.prev.next = newNode;
+                newNode.prev = current.prev.next;
+                current.prev = newNode;
             }
-
-            if (current.next == null) {
-                current.next = newNode;
-                newNode.prev = current;
-                return head;
-            }
-
-            current = current.next;
+            return head;
         }
+
+        if (current.next == null) {
+            current.next = newNode;
+            newNode.prev = current;
+            return head;
+        }
+
+        current = current.next;
     }
 }
