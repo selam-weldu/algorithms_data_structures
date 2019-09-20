@@ -60,8 +60,7 @@ var reorderList = function (head) {
     while (i < Math.floor(arr.length / 2)) {
         current = arr[i];
         current.next = arr[arr.length - 1 - i];
-        ++i;
-        current.next.next = arr[i];
+        current.next.next = arr[++i];
     }
 
     arr[i].next = null;
