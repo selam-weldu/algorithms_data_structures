@@ -13,23 +13,23 @@
 
 var mergeTwoLists = function (l1, l2) {
     if (!l1 || !l2) return l1 || l2;
-
-    let mergedList = new ListNode(0);
-    let current = mergedList;
+    
+    let merged = new ListNode();
+    let head = merged;
 
     while (l1 && l2) {
         if (l1.val <= l2.val) {
-            current.next = new ListNode(l1.val);
+            merged.next = l1;
             l1 = l1.next;
-        } else if (l1.val > l2.val) {
-            current.next = new ListNode(l2.val);
+        } else {
+            merged.next = l2;
             l2 = l2.next;
         }
-        current = current.next;
+        merged = merged.next;
     }
 
-    if (!l1) current.next = l2;
-    if (!l2) current.next = l1;
+    if (l1) merged.next = l1;
+    if (l2) merged.next = l2;
 
-    return mergedList.next;
+    return head.next; 
 };
