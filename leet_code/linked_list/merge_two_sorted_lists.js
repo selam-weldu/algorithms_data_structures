@@ -12,8 +12,7 @@
 */
 
 var mergeTwoLists = function (l1, l2) {
-    if (!l1) return l2;
-    if (!l2) return l1;
+    if (!l1 || !l2) return l1 || l2;
 
     let mergedList = new ListNode(0);
     let current = mergedList;
