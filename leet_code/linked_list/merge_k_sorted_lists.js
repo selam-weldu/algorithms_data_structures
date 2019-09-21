@@ -1,9 +1,11 @@
 var mergeKLists = function (lists) {
-
     if (!lists.length) return null;
+    if (lists.length === 1) return lists[0];
 
     let merged = lists[0];
+    // start i from 1
     for (let i = 1; i < lists.length; i++) {
+        // merge merged with lists[i] and update merged
         merged = mergeTwoLists(merged, lists[i]);
     }
 
