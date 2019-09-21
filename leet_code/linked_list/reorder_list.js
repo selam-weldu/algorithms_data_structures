@@ -30,29 +30,34 @@ var reorderList = function (head) {
 ////////////////////////
 
 var reorderList = function (head) {
-    if(!head || !head.next) return head;
+    if (!head || !head.next || !head.next.next) return null;
 
-    let mid = findMid(head)
-    let reversedList = reverse(mid.next)
-    mid.next = null
-    return merge(head, reversedList)
+    let midNode = findMid(head);
+    // reverse list after the middle node
+    let reversed = reverse(midNode.next);
+    // important because divides list into two different ones, and
+    // accuratly sets middleNode as the new tail of the reodered list
+    midNode.next = null;
+    return merge(head, reversed);
 };
 
-var findMid = function (node) {
-    let slow = node;
-    let fast = node;
+const findMid = function (node) {
+    let slow = node,
+        fast = node;
+
     while (fast.next && fast.next.next) {
-        slow = slow.next
-        fast = fast.next.next
+        slow = slow.next;
+        fast = fast.next.next;
     }
+
     return slow;
 }
-// reverse only after mid
 
-var reverse = function (node) {
+const reverse = function (node) {
     let prev,
         next = null,
         current = node;
+
     while (current) {
         prev = current.next;
 
@@ -61,19 +66,27 @@ var reverse = function (node) {
         next = current;
         current = prev;
     }
+
     return next;
 }
 
-var merge = function (list1, list2) {
-    if (!list2) return list1
-    while (list2) {
-        let tmp = list2.next
-        list2.next = list1.next
-        list1.next = list2
-        list2 = tmp
-        list1 = list1.next.next
+const merge = function (l1, l2) {
+    if (!l2) return l1;
+
+    let current = l1,
+        current2 = l2,
+        prev, prev2;
+
+    while (current2) {
+        prev = current.next;
+        prev2 = current2.next;
+
+        current.next = current2;
+        current2.next = prev;
+
+        current = prev;
+        current2 = prev2;
     }
-    return list1
+
+    return l1;
 }
-
-
