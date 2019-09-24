@@ -2,6 +2,8 @@
 // we only need insertion and removal at constant time, so it's better to 
 // use a linked-list(either singly or doubly linked)
 
+// Stacks are LIFO DS
+// used for call stack, undo/redo
 class Node{
     constructor(value){
         this.value = value;
