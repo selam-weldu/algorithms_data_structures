@@ -35,3 +35,23 @@ function balancedBrackets(string) {
 
     return !stack.length ? true : false;
 }
+
+
+// As the stack could have a lot of repeat characters, it may be beneficial to store it as follows.
+
+//     Input: [[[[[[[[[[(((((((((())))))))))))))]]]]]]]]]]
+// Longer stack: [[[[[[[[[[((((((((((
+//     Better stack :
+// Object(“[” and 10 )
+// Object(“(” and 10)
+
+// Make everything into objects so you only have to pop 
+// the stack once without doing wacky calculations.The object holds the 
+// character and the number of times it occurred.
+
+// Pop the stack, check its character; if it’s a new opening bracket of the 
+// same kind, increment the counter.Decrement the counter for the closing 
+// bracket.If the closing bracket brings it to 0, then don’t push the object 
+// back to the stack.That way you can handle([]{}).If the new character is 
+// different from the last one, create a new object with the count at 1, and 
+// the set the new character accordingly.
