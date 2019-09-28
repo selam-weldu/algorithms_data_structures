@@ -70,8 +70,8 @@ class BST{
         return false;
     }
 
-    remove(value, node = null){
-        let current = node || this.root,
+    remove(value, node){
+        let current = node,
             parent = current;
 
 
@@ -131,7 +131,7 @@ class BST{
 //     tree.insert(val);
 // })
 
-// console.log(tree.contains(3))
 // console.log(tree.contains(0))
-// tree.remove(3);
-// console.log(tree.contains(3))
+// console.log(tree.contains(5))
+// tree.remove(5,tree.root);
+// console.log(tree.contains(5))
