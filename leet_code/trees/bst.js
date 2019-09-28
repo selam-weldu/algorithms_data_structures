@@ -70,9 +70,10 @@ class BST{
         return false;
     }
 
-    remove(value) {
-        let current = this,
+    remove(value, node = null){
+        let current = node || this.root,
             parent = current;
+
 
         while (current) {
             if (value < current.value) {
@@ -84,8 +85,8 @@ class BST{
             } else { //found node
                 // if it has two children
                 if (current.left && current.right) {
-                    current.value = current.right.getMinValue();
-                    current.right.remove(current.value);
+                    current.value = this.getMinValue(current.right);
+                    this.remove(current.value, current.right);
                 } else if (parent === current) { // if node is root
                     if (current.left) {
                         let leftChild = current.left;
@@ -112,13 +113,25 @@ class BST{
         return this;
     }
 
-    getMinValue() {
-        let current = this;
+    getMinValue(node) {
+        let current = node;
         while (current.left) {
             current = current.left;
         }
         return current.value;
     }
+
 }
 
 
+// let tree = new BST();
+// let input = [5, 3, 6, 2, 4, null, 7]
+
+// input.forEach(val => {
+//     tree.insert(val);
+// })
+
+// console.log(tree.contains(3))
+// console.log(tree.contains(0))
+// tree.remove(3);
+// console.log(tree.contains(3))
