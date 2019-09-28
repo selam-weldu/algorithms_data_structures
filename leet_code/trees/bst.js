@@ -70,7 +70,70 @@ class BST{
         return false;
     }
 
-    remove(value){
+    remove(value, parentNode = null) {
+        let current = this;
 
+        while (current) {
+            if (value < current.value && current.left) {
+                parentNode = current;
+                current = current.left;
+            } else if (value > current.value && current.right) {
+                parentNode = current;
+                current = current.right;
+            } else {
+                break;
+            }
+        }
+
+        if (!current.left && !current.right) {
+            // let minNode = current.right.getMinValue();
+
+            current.value = current.right.getMinValue();
+            // minNode = null;
+            current.right.remove(current.value, current);
+            return this;
+        }
+
+        if (!parentNode) {//root node
+            if (current.left) {
+                let leftChild = current.left;
+                current.value = leftChild.value;
+                current.left = leftChild.left;
+                current.right = leftChild.right;
+            } else if (current.right) {
+                let rightChild = current.right;
+                current.value = rightChild.value;
+                current.left = rightChild.left;
+                current.right = rightChild.right;
+            } else {
+                current.value = null;
+            }
+        } else {
+            if (parentNode.left === current) {
+                if (current.left) {
+                    parentNode.left = current.left;
+                } else {
+                    parentNode.left = current.right;
+                }
+            } else if (parentNode.right === current) {
+                if (current.right) {
+                    parentNode.right = current.right;
+                } else {
+                    parentNode.right = current.left;
+                }
+            } else {
+                current.value = null;
+            }
+        }
+
+        return this;
+    }
+
+    getMinValue() {
+        let current = this;
+        while (current.left) {
+            current = current.left;
+        }
+        return current.value;
     }
 }
