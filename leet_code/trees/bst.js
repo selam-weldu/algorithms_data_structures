@@ -70,9 +70,10 @@ class BST{
         return false;
     }
 
-    remove(value, parent = null) {
-        let current = this;
-        
+    remove(value) {
+        let current = this,
+            parent = current;
+
         while (current) {
             if (value < current.value) {
                 parent = current;
@@ -84,8 +85,8 @@ class BST{
                 // if it has two children
                 if (current.left && current.right) {
                     current.value = current.right.getMinValue();
-                    current.right.remove(current.value, current);
-                } else if (!parent) { // if node is root
+                    current.right.remove(current.value);
+                } else if (parent === current) { // if node is root
                     if (current.left) {
                         let leftChild = current.left;
                         current.value = leftChild.value;
