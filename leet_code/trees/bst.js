@@ -70,62 +70,44 @@ class BST{
         return false;
     }
 
-    remove(value, parentNode = null) {
+    remove(value, parent = null) {
         let current = this;
-
+        
         while (current) {
-            if (value < current.value && current.left) {
-                parentNode = current;
+            if (value < current.value) {
+                parent = current;
                 current = current.left;
-            } else if (value > current.value && current.right) {
-                parentNode = current;
+            } else if (value > current.value) {
+                parent = current;
                 current = current.right;
-            } else {
+            } else { //found node
+                // if it has two children
+                if (current.left && current.right) {
+                    current.value = current.right.getMinValue();
+                    current.right.remove(current.value, current);
+                } else if (!parent) { // if node is root
+                    if (current.left) {
+                        let leftChild = current.left;
+                        current.value = leftChild.value;
+                        current.left = leftChild.left;
+                        current.right = leftChild.right;
+                    } else if (current.right) {
+                        let rightChild = current.right;
+                        current.value = rightChild.value;
+                        current.left = rightChild.left;
+                        current.right = rightChild.right;
+                    } else {
+                        current.value = null;
+                    }
+                    //not the root node, and only has one child
+                } else if (parent.left === current) { // you are left child
+                    parent.left = current.left ? current.left : current.right;
+                } else if (parent.right === current) { // you are right child
+                    parent.right = current.right ? current.right : current.left;
+                }
                 break;
             }
         }
-
-        if (!current.left && !current.right) {
-            // let minNode = current.right.getMinValue();
-
-            current.value = current.right.getMinValue();
-            // minNode = null;
-            current.right.remove(current.value, current);
-            return this;
-        }
-
-        if (!parentNode) {//root node
-            if (current.left) {
-                let leftChild = current.left;
-                current.value = leftChild.value;
-                current.left = leftChild.left;
-                current.right = leftChild.right;
-            } else if (current.right) {
-                let rightChild = current.right;
-                current.value = rightChild.value;
-                current.left = rightChild.left;
-                current.right = rightChild.right;
-            } else {
-                current.value = null;
-            }
-        } else {
-            if (parentNode.left === current) {
-                if (current.left) {
-                    parentNode.left = current.left;
-                } else {
-                    parentNode.left = current.right;
-                }
-            } else if (parentNode.right === current) {
-                if (current.right) {
-                    parentNode.right = current.right;
-                } else {
-                    parentNode.right = current.left;
-                }
-            } else {
-                current.value = null;
-            }
-        }
-
         return this;
     }
 
@@ -137,3 +119,5 @@ class BST{
         return current.value;
     }
 }
+
+
