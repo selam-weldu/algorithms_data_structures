@@ -8,13 +8,15 @@ var buildTree = function (preorder, inorder) {
 
     let node = new TreeNode(preorder[0]);
 
-    if (inorder.length === 1) return node; //optimization
+    if (inorder.length === 1) return node; 
 
     let arr = divideArray(inorder, node.val),
         left = arr[0],
         right = arr[1];
 
-    node.left = buildTree(preorder.slice(1), left);
+    //when passing preorder, only need to make sure preorder[0]
+    // is the correct element. 
+    node.left = buildTree(preorder.slice(1), left); 
     node.right = buildTree(preorder.slice(1 + left.length), right);
 
     return node;
