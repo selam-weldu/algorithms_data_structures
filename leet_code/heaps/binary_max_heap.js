@@ -10,8 +10,8 @@ class MaxBinaryHeap {
 
     bubbleUp() {
         let idx = this.values.length - 1;
-        const element = this.values[idx];
-        
+        let element = this.values[idx];
+
         while (idx > 0) {
             let parentIdx = Math.floor((idx - 1) / 2);
             let parent = this.values[parentIdx];
@@ -38,9 +38,10 @@ class MaxBinaryHeap {
 
     sinkDown() {
         let idx = 0;
-        const length = this.values.length;
-        const element = this.values[0];
-        while (true) {
+        let length = this.values.length;
+        let element = this.values[0];
+
+        while (idx < length) {
             let leftChildIdx = 2 * idx + 1;
             let rightChildIdx = 2 * idx + 2;
             let leftChild, rightChild;
