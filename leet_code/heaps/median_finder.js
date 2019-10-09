@@ -1,3 +1,52 @@
+// init maxheap with the lower values
+// init minheap to store greater values
+
+// always keep the heaps balanced(no more than one length apart)
+// if heaps are of equal length, median is the average of root values
+// else median is the root value of the larger heap
+
+class MedianFinder {
+    constructor() {
+        this.lower = new MaxBinaryHeap();
+        this.greater = new MinBinaryHeap();
+        this.median = null;
+    }
+
+    addNum(num) {
+        if (!this.lower.length || num < this.lower.peek()) {
+            this.lower.insert(num);
+        } else {
+            this.greater.insert(num);
+        }
+
+        this.balanceHeaps();
+        this.updateMedian();
+    }
+
+    balanceHeaps() {
+        if (this.lower.length - this.greater.length == 2) {
+            this.greater.insert(this.lower.remove());
+        } else if (this.greater.length - this.lower.length == 2) {
+            this.lower.insert(this.greater.remove());
+        }
+    }
+
+    updateMedian() {
+        if (this.lower.length === this.greater.length) {
+            this.median = (this.lower.peek() + this.greater.peek()) / 2;
+        } else if (this.lower.length > this.greater.length) {
+            this.median = this.lower.peek();
+        } else {
+            this.median = this.greater.peek();
+        }
+    }
+
+    findMedian() {
+        return this.median;
+    }
+}
+
+
 class MinBinaryHeap {
     constructor() {
         this.values = [];
@@ -69,14 +118,6 @@ class MinBinaryHeap {
 }
 
 
-
-
-
-
-
-
-
-
 /////////////////////////////////
 
 class MaxBinaryHeap {
@@ -146,57 +187,5 @@ class MaxBinaryHeap {
             this.values[swap] = element;
             idx = swap;
         }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-/////////////////////
-
-class MedianFinder {
-    constructor() {
-        this.lower = new MaxBinaryHeap();
-        this.greater = new MinBinaryHeap();
-        this.median = null;
-    }
-
-    addNum(num) {
-        if (!this.lower.length || num < this.lower.peek()) {
-            this.lower.insert(num);
-        } else {
-            this.greater.insert(num);
-        }
-
-        this.balanceHeaps();
-        this.updateMedian();
-    }
-
-    balanceHeaps() {
-        if (this.lower.length - this.greater.length == 2) {
-            this.greater.insert(this.lower.remove());
-        } else if (this.greater.length - this.lower.length == 2) {
-            this.lower.insert(this.greater.remove());
-        }
-    }
-
-    updateMedian() {
-        if (this.lower.length === this.greater.length) {
-            this.median = (this.lower.peek() + this.greater.peek()) / 2;
-        } else if (this.lower.length > this.greater.length) {
-            this.median = this.lower.peek();
-        } else {
-            this.median = this.greater.peek();
-        }
-    }
-
-    findMedian() {
-        return this.median;
     }
 }
