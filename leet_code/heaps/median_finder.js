@@ -150,14 +150,53 @@ class MaxBinaryHeap {
 }
 
 
-// let heap = new MaxBinaryHeap();
-// heap.insert(41);
-// heap.insert(39);
-// heap.insert(33);
-// heap.insert(18);
-// heap.insert(27);
-// heap.insert(12);
-// heap.insert(55);
 
 
 
+
+
+
+
+
+/////////////////////
+
+class MedianFinder {
+    constructor() {
+        this.lower = new MaxBinaryHeap();
+        this.greater = new MinBinaryHeap();
+        this.median = null;
+    }
+
+    addNum(num) {
+        if (!this.lower.length || num < this.lower.peek()) {
+            this.lower.insert(num);
+        } else {
+            this.greater.insert(num);
+        }
+
+        this.balanceHeaps();
+        this.updateMedian();
+    }
+
+    balanceHeaps() {
+        if (this.lower.length - this.greater.length == 2) {
+            this.greater.insert(this.lower.remove());
+        } else if (this.greater.length - this.lower.length == 2) {
+            this.lower.insert(this.greater.remove());
+        }
+    }
+
+    updateMedian() {
+        if (this.lower.length === this.greater.length) {
+            this.median = (this.lower.peek() + this.greater.peek()) / 2;
+        } else if (this.lower.length > this.greater.length) {
+            this.median = this.lower.peek();
+        } else {
+            this.median = this.greater.peek();
+        }
+    }
+
+    findMedian() {
+        return this.median;
+    }
+}
