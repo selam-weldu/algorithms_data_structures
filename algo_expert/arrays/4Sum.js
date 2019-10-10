@@ -1,3 +1,6 @@
+// average : O(n^2) time 
+// worst : O(n^3) time
+// O(n^2) space
 function fourNumberSum(array, targetSum) {
     // regular outside loop, and two nested loops
     // first loop sums up a pair and checks if the
