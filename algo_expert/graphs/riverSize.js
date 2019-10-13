@@ -1,13 +1,11 @@
-// O(n) time, n is number of nodes in matrix
-// O(1) space
-
 function riverSizes(matrix) {
   let sizes = [];
 
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[0].length; col++) {
-      if (matrix[row][col] === 0) continue;
-      traverse(row, col, matrix, sizes);
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] === 1) {
+        traverse(i, j, matrix, sizes);
+      }
     }
   }
 
@@ -17,36 +15,33 @@ function riverSizes(matrix) {
 function traverse(i, j, matrix, sizes) {
   let riverSize = 0;
   let stack = [[i, j]];
-  let currentNode, unvisitedNeighbors;
+  let neighbors;
 
   while (stack.length) {
-    currentNode = stack.pop();
-    i = currentNode[0];
-    j = currentNode[1];
+    [i, j] = stack.pop();
 
     if (matrix[i][j] === 0) continue;
     matrix[i][j] = 0;
 
     ++riverSize;
-    unvisitedNeighbors = getUnvisitedNeighbors(i, j, matrix);
 
-    unvisitedNeighbors.forEach(neighbor => {
+    neighbors = getNeighbors(i, j, matrix);
+
+    neighbors.forEach(neighbor => {
       stack.push(neighbor);
     });
   }
 
-  if (riverSize > 0) sizes.push(riverSize);
+  if (riverSize) sizes.push(riverSize);
 }
 
-function getUnvisitedNeighbors(i, j, matrix) {
-  unvisitedNeighbors = [];
+function getNeighbors(i, j, matrix) {
+  neighbors = [];
 
-  if (i > 0) unvisitedNeighbors.push([i - 1, j]);
-  if (j > 0) unvisitedNeighbors.push([i, j - 1]);
-  if (i < matrix.length - 1) unvisitedNeighbors.push([i + 1, j]);
-  if (j < matrix[0].length - 1) unvisitedNeighbors.push([i, j + 1]);
+  if (i > 0) neighbors.push([i - 1, j]);
+  if (j > 0) neighbors.push([i, j - 1]);
+  if (i < matrix.length - 1) neighbors.push([i + 1, j]);
+  if (j < matrix[0].length - 1) neighbors.push([i, j + 1]);
 
-  return unvisitedNeighbors;
+  return neighbors;
 }
-
-
