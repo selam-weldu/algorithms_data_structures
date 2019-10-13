@@ -84,17 +84,19 @@ class Graph {
       let queue = [start];
       let vertex;
 
+      visited[start] = true;
+
       while(queue.length){
         vertex = queue.shift();
 
-        if(!visited[vertex]){
-            visited[vertex] = true;
-            result.push(vertex);
+        result.push(vertex);
 
-            this.adjacencyList[vertex].forEach(neighbor => {
-                queue.push(neighbor);
-            });
-        }
+        this.adjacencyList[vertex].forEach(neighbor => {
+          if(!visited[neighbor]){
+            visited[neighbor] = true;
+            queue.push(neighbor);
+          }
+        })
       }
 
       return result;
@@ -132,4 +134,4 @@ console.log(g.breadthFirst("A")); // [ 'A', 'B', 'C', 'D', 'E', 'F' ]
 //       |     |
 //       D --- E
 //        \   /
-//
+//          F
