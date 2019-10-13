@@ -1,3 +1,6 @@
+// O(n * 8^s + ws) time
+// O(n + ws) space
+// n is total cells, s: length of longest word, w: number of words
 function boggleBoard(board, words) {
   let trie = new Trie();
 
@@ -18,12 +21,12 @@ function boggleBoard(board, words) {
 }
 
 function explore(i, j, board, trieNode, visited, finalWords) {
-  if (!visited[i][j]) return;
+  if (visited[i][j]) return;
 
   let letter = board[i][j];
 
-  if (!trieNode[letter]) return;
-  trieNode = trieNode[letter];
+  if (!trieNode.children[letter]) return;
+  trieNode = trieNode.children[letter];
   visited[i][j] = true;
 
   if (trieNode.end) {
@@ -31,32 +34,29 @@ function explore(i, j, board, trieNode, visited, finalWords) {
   }
 
   let neighbors = getNeighbors(i, j, board);
-  for (let neighbor of neighbors) {
-    if (!visted[neighbor[0]][neighbor[1]]) {
-      explore(neighbor[0], neighbor[1], trieNode, visited, finalWords);
-    }
-  }
+
+  neighbors.forEach(neighbor => {
+    explore(neighbor[0], neighbor[1], board, trieNode, visited, finalWords);
+  });
+
   visited[i][j] = false;
 }
 
-function getNeighbors(i,j,board){
-    neighbors = [];
+function getNeighbors(i, j, board) {
+  neighbors = [];
 
-    if (i > 0) neighbors.push([i - 1, j]);
-    if (j > 0) neighbors.push([i, j - 1]);
-    if (i < board.length - 1) neighbors.push([i + 1, j]);
-    if (j < board[0].length - 1) neighbors.push([i, j + 1]);
-    if (i > 0 && j > 0) neighbors.push([i - 1, j - 1]);
-    if (i < board.length - 1 && j < board[0].length - 1) neighbors.push([i + 1, j + 1]);
-    if ( i < board.length - 1 && j > 0) neighbors.push([i + 1, j - 1]);
-    if (i > 0 && j < board[0].length - 1) neighbors.push([i + 1, j - 1]);
+  if (i > 0) neighbors.push([i - 1, j]);
+  if (j > 0) neighbors.push([i, j - 1]);
+  if (i < board.length - 1) neighbors.push([i + 1, j]);
+  if (j < board[0].length - 1) neighbors.push([i, j + 1]);
+  if (i > 0 && j > 0) neighbors.push([i - 1, j - 1]);
+  if (i < board.length - 1 && j < board[0].length - 1)
+    neighbors.push([i + 1, j + 1]);
+  if (i < board.length - 1 && j > 0) neighbors.push([i + 1, j - 1]);
+  if (i > 0 && j < board[0].length - 1) neighbors.push([i - 1, j + 1]);
 
-    return neighbors;
+  return neighbors;
 }
-
-// Do not edit the line below.
-exports.boggleBoard = boggleBoard;
-
 
 class TrieNode {
   constructor(key) {
@@ -87,3 +87,4 @@ class Trie {
     return this;
   }
 }
+
