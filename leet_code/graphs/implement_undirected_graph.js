@@ -40,8 +40,8 @@ class Graph {
     function traverse(vertex) {
       if (!vertex) return;
 
-      result.push(vertex);
       visited[vertex] = true;
+      result.push(vertex);
 
       adjacencyList[vertex].forEach(neighbor => {
         if (!visited[neighbor]) {
@@ -60,21 +60,22 @@ class Graph {
       let visited = {};
       let stack = [start];
       let vertex;
-    
+
+      visited[start] = true;
+
       while(stack.length){
-          vertex = stack.pop();
+        vertex = stack.pop();
 
-          if(!visited[vertex]){
-              visited[vertex] = true;
-              result.push(vertex);
-              
-              this.adjacencyList[vertex].forEach(neighbor => {
-                  stack.push(neighbor);
-              })
+        result.push(vertex);
+
+        this.adjacencyList[vertex].forEach(neighbor => {
+          if(!visited[neighbor]){
+            visited[neighbor] = true;
+            stack.push(neighbor);
           }
+        })
       }
-
-      return result;
+    return result;  
   }
 
   breadthFirst(start){
@@ -121,9 +122,9 @@ g.addEdge("C","E")
 g.addEdge("D","E")
 g.addEdge("D","F")
 g.addEdge("E","F")
-console.log(g.depthFirstRecursive("A"));
-console.log(g.depthFirstIterative("A"));
-console.log(g.breadthFirst("A"));
+console.log(g.depthFirstRecursive("A")); // [ 'A', 'B', 'D', 'E', 'C', 'F' ]
+console.log(g.depthFirstIterative("A")); // [ 'A', 'C', 'E', 'F', 'D', 'B' ]
+console.log(g.breadthFirst("A")); // [ 'A', 'B', 'C', 'D', 'E', 'F' ]
 
 //          A
 //        /   \
