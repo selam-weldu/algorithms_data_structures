@@ -4,36 +4,47 @@
 // dfs on all values == 1
 // check edge cases so row and col are within bounds
 // change 1 into 0 so we don't revisit
-const numIslands = function(grid) {
-  let numIslands = 0;
 
-  for (let row = 0; row < grid.length; row++) {
-    for (let col = 0; col < grid[0].length; col++) {
-      if (grid[row][col] == 0) continue;
-      numIslands += traverse(row, col, grid);
+var numIslands = function(grid) {
+  let count = 0;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] == 1) {
+        count += traverse(i, j, grid);
+      }
     }
   }
 
-  return numIslands;
+  return count;
 };
 
-const traverse = function(row, col, grid) {
-  if (
-    row < 0 ||
-    col < 0 ||
-    row >= grid.length ||
-    col >= grid[0].length ||
-    grid[row][col] == 0
-  ) {
-    return 0;
+function traverse(i, j, grid) {
+  let stack = [[i, j]];
+  let neighbors;
+
+  while (stack.length) {
+    [i, j] = stack.pop();
+
+    if (grid[i][j] == 0) continue;
+    grid[i][j] = 0;
+
+    neighbors = getNeighbors(i, j, grid);
+
+    neighbors.forEach(neighbor => {
+      stack.push(neighbor);
+    });
   }
-
-  grid[row][col] = 0;
-
-  traverse(row - 1, col, grid);
-  traverse(row + 1, col, grid);
-  traverse(row, col + 1, grid);
-  traverse(row, col - 1, grid);
-
   return 1;
-};
+}
+
+function getNeighbors(i, j, matrix) {
+  neighbors = [];
+
+  if (i > 0) neighbors.push([i - 1, j]);
+  if (j > 0) neighbors.push([i, j - 1]);
+  if (i < matrix.length - 1) neighbors.push([i + 1, j]);
+  if (j < matrix[0].length - 1) neighbors.push([i, j + 1]);
+
+  return neighbors;
+}
