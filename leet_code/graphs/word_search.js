@@ -1,106 +1,40 @@
+// O(n) space and time, n: number of cells
 var exist = function(board, word) {
-  if (!board || !board[0]) return false;
-  if (!word) return false;
-  const m = board.length;
-  const n = board[0].length;
-  let r = false;
+  let visited = board.map(row => row.map(el => false));
 
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (board[i][j] === word[0]) {
-        dfs(i, j, board, word, "", r);
-      }
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[0].length; col++) {
+      if (board[row][col] !== word.charAt(0)) continue;
+      if (search(row, col, 0, board, visited, word)) return true;
     }
   }
 
-  return r;
+  return false;
 };
 
-const dfs = function(i, j, board, word, curWord, r) {
-  curWord += board[i][j];
-  if (curWord.length > word.length || r) return;
-  if (curWord === word) r = true;
+const search = function(row, col, idx, board, visited, word) {
+  if (idx == word.length) return true;
+  if (
+    row < 0 ||
+    col < 0 ||
+    row >= board.length ||
+    col >= board[0].length ||
+    visited[row][col] ||
+    board[row][col] != word.charAt(idx)
+  )
+    return false;
 
-  const tmp = board[i][j];
-  board[i][j] = "@";
+  visited[row][col] = true;
 
-  let neighbors = getNeighbors(i, j, board, word, curWord);
+  let found =
+    search(row + 1, col, idx + 1, board, visited, word) ||
+    search(row - 1, col, idx + 1, board, visited, word) ||
+    search(row, col + 1, idx + 1, board, visited, word) ||
+    search(row, col - 1, idx + 1, board, visited, word);
 
-  for (let neighbor of neighbors) {
-    dfs(neighbor[0], neighbor[1], board, word, curWord, r);
-  }
-  board[i][j] = tmp;
+  visited[row][col] = false;
+  return found;
 };
 
-function getNeighbors(i, j, board, word, curWord) {
-  let neighbors = [];
-  const dx = [0, 0, 1, -1];
-  const dy = [1, -1, 0, 0];
-  const m = board.length;
-  const n = board[0].length;
-
-  for (let k = 0; k < 4; k++) {
-    const x = i + dx[k];
-    const y = j + dy[k];
-    if (
-      0 <= x &&
-      x < m &&
-      0 <= y &&
-      y < n &&
-      board[x][y] !== "@" &&
-      board[x][y] === word[curWord.length]
-    ) {
-      neighbors.push([x, y]);
-    }
-  }
-
-  return neighbors;
-}
 
 
-
-/////////////////////
-
-var exist = function(board, word) {
-  if (!board || !board[0]) return false;
-  if (!word) return false;
-  const m = board.length;
-  const n = board[0].length;
-  const dx = [0, 0, 1, -1];
-  const dy = [1, -1, 0, 0];
-  let r = false;
-
-  const dfs = (i, j, curWord) => {
-    curWord += board[i][j];
-    if (curWord.length > word.length || r) return;
-    if (curWord === word) r = true;
-
-    const tmp = board[i][j];
-    board[i][j] = "@";
-    for (let k = 0; k < 4; k++) {
-      const x = i + dx[k];
-      const y = j + dy[k];
-      if (
-        0 <= x &&
-        x < m &&
-        0 <= y &&
-        y < n &&
-        board[x][y] !== "@" &&
-        board[x][y] === word[curWord.length]
-      ) {
-        dfs(x, y, curWord);
-      }
-    }
-    board[i][j] = tmp;
-  };
-
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (board[i][j] === word[0]) {
-        dfs(i, j, "");
-      }
-    }
-  }
-
-  return r;
-};
