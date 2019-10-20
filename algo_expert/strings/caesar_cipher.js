@@ -1,21 +1,26 @@
 // O(n) time, O(n) space
 function caesarCipherEncryptor(string, key) {
-  let newStr = "";
+  // Write your code here.
+  let encodedString = "";
+
   let newKey = key % 26;
 
   for (let char of string) {
-    newStr += getNewChar(char, newKey);
+    encodedString += encode(char, newKey);
   }
 
-  return newStr;
+  return encodedString;
 }
 
-function getNewChar(char, key) {
-  let newKey = char.charCodeAt() + key;
+function encode(char, key) {
+  // 	97 -> A and 122 -> Z
+  let newCode = key + char.charCodeAt();
 
-  return newKey > 122
-    ? String.fromCharCode(96 + (newKey % 122))
-    : String.fromCharCode(newKey);
+  if (newCode > 122) {
+    return String.fromCharCode((newCode % 122) + 96)
+  } else {
+    return String.fromCharCode(newCode);
+  }
 }
 
 
