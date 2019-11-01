@@ -1,3 +1,5 @@
+# O(nlogn + n^2) ~= O(n^2) time
+# O(n) space
 class Solution:
     def threeSum(self, nums):
         nums.sort()
