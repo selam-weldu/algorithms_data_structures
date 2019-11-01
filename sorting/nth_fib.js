@@ -11,6 +11,4 @@ function getNthFib(n) {
     if (n > 2) {
         return getNthFib(n - 1) + getNthFib(n - 2)
     }
-
-
 }
