@@ -20,6 +20,7 @@ class Solution:
 
         return depth
 
+
 # O(n) time, O(n) space
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
