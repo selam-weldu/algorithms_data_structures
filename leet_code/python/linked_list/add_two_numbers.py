@@ -3,6 +3,8 @@ class ListNode:
         self.val = x
         self.next = None
 
+
+# O(n) time, O(n) space n: length of larger number
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
 
