@@ -1,6 +1,4 @@
-# O(n) time
-# O(n) time
-# O(1) space
+# O(n) time, O(1) space
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
         slow = head

@@ -1,5 +1,4 @@
-# O(n) time
-# O(1) space
+# O(n) time, O(1) space
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
         slow, fast = head, head
