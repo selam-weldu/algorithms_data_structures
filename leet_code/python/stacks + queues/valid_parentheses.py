@@ -1,28 +1,18 @@
 # O(n) time, O(n) space
 class Solution:
     def isValid(self, s: str) -> bool:
-        brackets = {
-            "[": "]",
-            "(": ")",
-            "{": "}"
-        }
+        brackets = {'(': ')', '{': '}', '[': ']'}
+        left_chars = []
 
-        opening_brackets = "({["
-        closing_brackets = ")}]"
-        stack = []
-
-        for i, char in enumerate(s):
-            if char in opening_brackets:
-                stack.append(char)
-            elif char in closing_brackets:
-                if len(stack) == 0:
+        for char in s:
+            if char in brackets:
+                left_chars.append(char)
+            elif char in ']})':
+                if not left_chars or brackets[left_chars[-1]] != char:
                     return False
+                left_chars.pop()
 
-                if brackets[stack[-1]] != char:
-                    return False
-                else:
-                    stack.pop()
-        return len(stack) == 0
+        return not left_chars
 
 
 
