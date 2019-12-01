@@ -10,8 +10,8 @@ class MinBinaryHeap {
 
     insert(val) {
         this.values.push(val);
-        this.bubbleUp();
         ++this.length;
+        this.bubbleUp();
     }
     bubbleUp() {
         let idx = this.values.length - 1;
