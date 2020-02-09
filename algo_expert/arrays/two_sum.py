@@ -12,3 +12,21 @@ def twoNumberSum(array, targetSum):
             matches.add(num)
 
     return []
+
+# O(nlogn) time, O(1) space
+
+
+def twoNumberSum1(array, targetSum):
+	array.sort()
+	left, right = 0, len(array) - 1
+
+	while left < right:
+		current_sum = array[left] + array[right]
+		if current_sum == targetSum:
+			return [array[left], array[right]]
+		elif current_sum < targetSum:
+			left += 1
+		else:
+			right -= 1
+
+	return []
