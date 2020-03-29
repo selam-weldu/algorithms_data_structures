@@ -7,31 +7,13 @@ def inorder_recursive(root, nodes = []):
 
     return nodes
 
-#  public void inorderItr(Node root){
-#         Deque<Node> stack = new LinkedList<Node>();
-#         Node node = root;
-#         while(true){
-#             if(node != null){
-#                 stack.addFirst(node);
-#                 node = node.left;
-#             }
-#             else{
-#                 if(stack.isEmpty()){
-#                     break;
-#                 }
-#                 node = stack.pollFirst();
-#                 System.out.println(node.data);
-#                 node = node.right;
-#             }
-#         }
-#     }
 
 def inorder_iterative(root):
     stack = []
     nodes = []
     node = root
 
-    while true:
+    while True:
         if node:
             stack.append(node)
             node = node.left
