@@ -9,7 +9,7 @@ class Solution:
             left = i + 1
             right = length - 1
             
-            if nums[i] > 0: break # positive numbers will add upto more than zero
+            if nums[i] > 0: break # positive numbers will add upto more than zero or target sum
             if i > 0 and nums[i] == nums[i-1]: continue # avoid duplicates
                 
             while left < right:
