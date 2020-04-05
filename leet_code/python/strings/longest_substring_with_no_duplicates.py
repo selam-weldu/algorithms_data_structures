@@ -1,19 +1,18 @@
 # O(n) time
 # O(min(u)) space, u: len(unique char in string)
-class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        if len(s) < 1:
-            return 0
 
-        start_idx = 0
-        longest = [0, 1]
-        seen = {}
 
-        for i, char in enumerate(s):
-            if char in seen:
-                start_idx = max(start_idx, seen[char] + 1)
-            if longest[1] - longest[0] < i - start_idx + 1:
-                longest = [start_idx, i + 1]
-            seen[char] = i
+def longestSubstringWithoutDuplication(string):
+    seen_letters = {}
+    longest_substr = [0, 0]
 
-        return longest[1] - longest[0]
+    start = 0
+    for i,char in enumerate(string):
+        if char in seen_letters:
+            start = max(start, seen_letters[char] + 1)
+    
+        seen_letters[char] = i    
+        longest_substr = max(longest_substr, [start,i], key=lambda x: x[1]-x[0])
+
+
+    return string[longest_substr[0]:longest_substr[1]+1]
