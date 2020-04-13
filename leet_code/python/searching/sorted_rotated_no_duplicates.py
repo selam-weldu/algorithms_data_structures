@@ -1,5 +1,5 @@
 
-# O(log n) time and space
+# O(log n) time  | O(1) space
 class Solution(object):
     def search(self, nums, target):
         if not nums:
@@ -18,8 +18,6 @@ class Solution(object):
             return self.binary_search(nums, target, 0, pivot - 1)
 
     def find_pivot(self, arr):
-            if not arr or len(arr) == 0:
-                return -1
 
             if arr[0] <= arr[-1]:
                 return 0
@@ -31,7 +29,8 @@ class Solution(object):
 
                 if arr[mid] > arr[mid + 1]:
                     return mid + 1
-                elif arr[start] <= arr[mid]:
+
+                if arr[start] <= arr[mid]:
                     start = mid + 1
                 else:
                     end = mid - 1
