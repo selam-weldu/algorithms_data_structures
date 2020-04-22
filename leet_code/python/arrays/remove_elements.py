@@ -1,13 +1,16 @@
 # O(n) time | O(1) space
-class Solution:
-    def removeElement(self, nums: List[int], val: int) -> int:
-        start, end = 0, len(nums)-1
+def moveElementToEnd(array, toMove):
+    if len(array) <= 1:
+        return array
 
-        while start <= end:
-            if nums[start] == val:
-                nums[start], nums[end] = nums[end], nums[start]
-                end -= 1
-            else:
-                start += 1
+    i = 0
+    j = len(array) - 1
 
-        return start
+    while i < j:
+        while i < j and array[i] != toMove:
+            i += 1
+        while i < j and array[j] == toMove:
+            j -= 1
+
+        array[i], array[j] = array[j], array[i]
+    return array
