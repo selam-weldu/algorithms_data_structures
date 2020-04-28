@@ -2,11 +2,10 @@
 def riverSizes(matrix):
     sizes = []
 
-
-for row in range(len(matrix)):
-		for col in range(len(matrix[0])):
-			if matrix[row][col] == 1:
-				sizes.append(count(matrix, row, col))
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            if matrix[row][col] == 1:
+                sizes.append(count(matrix, row, col))
 
 	return sizes
 

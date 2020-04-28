@@ -19,15 +19,29 @@ def count(grid, i, j):
     grid[i][j] = 0
     result = 1
 
-    result += count(grid,i+1,j+1)
-    result += count(grid,i,j+1)
-    result += count(grid,i+1,j)
-    result += count(grid,i-1,j-1)
-    result += count(grid,i,j-1)
-    result += count(grid,i-1,j)
-    result += count(grid,i-1,j+1)
-    result += count(grid,i+1,j-1)
+    for node in get_neighbors(grid, i, j):
+        result += count(grid, node[0], node[1])
 
     return result
 
-    # return 1 + (count(grid, i+1, j+1) + count(grid, i, j+1) + count(grid, i+1, j) + count(grid, i-1, j-1) + count(grid, i, j-1) + count(grid, i-1, j) + count(grid, i-1, j+1) + count(grid, i+1, j-1))
+
+def get_neighbors(matrix, row, col):
+    dr = [1, -1, 0, 0, 1, -1, 1, -1]
+    dc = [0, 0, 1, -1, -1, 1, 1, -1]
+
+    neighbors = []
+
+    for i in range(len(dr)):
+        r = row + dr[i]
+        c = col + dc[i]
+
+        if r < 0 or c < 0:
+            continue
+        if r >= len(matrix) or c >= len(matrix[0]):
+            continue
+        if matrix[r][c] == 0:
+            continue
+
+        neighbors.append((r, c))
+
+    return neighbors
