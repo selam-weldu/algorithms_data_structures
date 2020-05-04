@@ -8,45 +8,33 @@ class AncestralTree:
 
 
 def getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo):
-    if descendantOne.name == topAncestor.name or topAncestor.name == descendantTwo.name:
-		return topAncestor
 
-	if descendantOne.name == descendantTwo.name:
-		return descendantOne.ancestor
-	
-	node_one, node_two = level(topAncestor, descendantOne, descendantTwo)
-	
-	while node_one.name != node_two.name:
+	node_one, node_two = level(descendantOne, descendantTwo)
+	while node_one != node_two:
 		node_one = node_one.ancestor
 		node_two = node_two.ancestor
-
 	return node_one
 
-def level(top,one,two):	
-	depth_one = getDepth(top,one)
-	depth_two = getDepth(top,two)
-	
+
+def level(one, two):
+	depth_one = getDepth(one)
+	depth_two = getDepth(two)
+
 	if depth_one > depth_two:
-		lower = one
-		higher = two
-	elif depth_one < depth_two:
-		lower = two
-		higher = one
+		lower, higher = one, two
 	else:
-		return one, two
-	
+		lower, higher = two, one
+
 	difference = abs(depth_one - depth_two)
-	
 	while difference > 0:
 		lower = lower.ancestor
 		difference -= 1
 	return lower, higher
-		
-def getDepth(top, node):
+
+
+def getDepth(node):
 	depth = 0
-	
 	while node.ancestor:
 		node = node.ancestor
 		depth += 1
-		
 	return depth
