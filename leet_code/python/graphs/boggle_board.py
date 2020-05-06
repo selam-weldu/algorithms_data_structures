@@ -1,4 +1,5 @@
-# O(ws + nm*8s) time | O(nm + ws) space
+# O(ws + nm*8^s) time | O(nm + ws) space
+# w: number of words, s: length of longest word, nm:dimensions of board
 class Trie:
 	def __init__(self):
 		self.root = {}
