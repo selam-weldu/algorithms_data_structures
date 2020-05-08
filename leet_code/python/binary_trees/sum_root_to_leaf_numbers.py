@@ -1,6 +1,6 @@
 # O(n) time, O(h) space
 class Solution:
-    def sumNumbers(self, root: TreeNode) -> int:
+    def sumNumbers(self, root):
         return self.sumHelper(root, current_sum = 0)
     
     
