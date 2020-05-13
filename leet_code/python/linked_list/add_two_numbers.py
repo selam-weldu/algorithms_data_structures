@@ -5,19 +5,26 @@ class ListNode:
 
 
 # O(n) time, O(n) space n: length of larger number
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+def addTwoNumbers(self, l1, l2):
+        if (not l1 and l2) or (not l2 and l1):
+            return l1 or l2
 
-        carry = 0
-        sumList = current = ListNode(0)
+        carry = running_sum = 0
+        result = head = ListNode(0)
 
-        while l1 or l2 or carry:
-            val = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
+        while l1 or l2:
+            running_sum = carry
+            if l1:
+                running_sum += l1.val
+                l1 = l1.next
+            if l2:
+                running_sum += l2.val
+                l2 = l2.next
+            carry = running_sum // 10
+            result.next = ListNode(running_sum % 10)
+            result = result.next
 
-            carry = val // 10
-            current.next = ListNode(val % 10)
-            current = current.next
+        if carry:
+            result.next = ListNode(carry)
 
-            l1 = l1.next if l1 else None
-            l2 = l2.next if l2 else None
-        return sumList.next
+        return head.next
