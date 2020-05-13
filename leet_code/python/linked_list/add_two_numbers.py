@@ -11,7 +11,6 @@ def addTwoNumbers(self, l1, l2):
 
         carry = running_sum = 0
         result = head = ListNode(0)
-
         while l1 or l2:
             running_sum = carry
             if l1:
