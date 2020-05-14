@@ -15,9 +15,7 @@ class Trie:
 
 def boggleBoard(board, words):
     trie = Trie()
-
-
-for word in words:
+	for word in words:
 		trie.add(word)
 
 	final_words = {}
