@@ -14,3 +14,14 @@ def isValidSubsequence(array, sequence):
 		seqIdx += 1
 		
 	return True
+
+
+
+def isValidSubsequence2(array1, sequence1):
+    seqIdx = 0
+	for value in array1:
+		if sequence1[seqIdx] == value:
+			seqIdx += 1
+		if seqIdx == len(sequence1):
+			return True
+	return seqIdx == len(sequence1)
