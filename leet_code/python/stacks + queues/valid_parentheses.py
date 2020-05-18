@@ -1,19 +1,16 @@
-# O(n) time, O(n) space
-class Solution:
-    def isValid(self, s: str) -> bool:
-        brackets = {'(': ')', '{': '}', '[': ']'}
-        left_chars = []
+# O(n) time and space
+def balancedBrackets(string):
+    stack = []
+    openBrackets = '([{'
+    closingBrackets = ')}]'
+    pairs = {')': '(', '}': '{', ']': '['}
 
-        for char in s:
-            if char in brackets:
-                left_chars.append(char)
-            elif char in ']})':
-                if not left_chars or brackets[left_chars[-1]] != char:
-                    return False
-                left_chars.pop()
-
-        return not left_chars
-
-
-
-
+    for char in string:
+        if char in openBrackets:
+            stack.append(char)
+        elif char in closingBrackets:
+            if not len(stack) or stack[-1] != pairs[char]:
+                return False
+            else:
+                stack.pop()
+    return not len(stack)
