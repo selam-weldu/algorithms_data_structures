@@ -1,5 +1,7 @@
 #O(nm) time and space
 def spiralTraverse(array):
+    if len(matrix) == 0:
+        return []
 	result = []
     startRow, endRow = 0, len(array) - 1
 	startCol, endCol = 0, len(array[0]) - 1
