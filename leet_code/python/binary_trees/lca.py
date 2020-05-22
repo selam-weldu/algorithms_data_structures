@@ -7,3 +7,13 @@ def lca(root, p, q):
         return lca(root.right, p, q)
     else:
         return root
+
+# O(h) time | O(1) space
+def lca1(self, root, p, q):
+    while root:
+        if max(p.val, q.val) < root.val:  
+            root = root.left
+        elif min(p.val, q.val) > root.val:  
+            root = root.right
+        else:
+            return root
