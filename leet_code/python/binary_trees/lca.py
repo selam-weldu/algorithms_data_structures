@@ -17,3 +17,18 @@ def lca1(self, root, p, q):
             root = root.right
         else:
             return root
+
+
+def lca2(self, root, p, q):
+    if not root:
+        return None
+    if root == p or root == q:
+        return root
+
+    left = self.lca2(root.left,p,q)
+    right = self.lca2(root.right,p,q)
+
+    if left and right:
+        return root
+    else:
+        return left or right
