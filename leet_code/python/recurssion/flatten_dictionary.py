@@ -4,7 +4,6 @@ def flatten_dictionary(dictionary):
 
 def flatten(initial_key,dictionary,flat_diction,sep):
   for k,v in dictionary.items():
-    new_key = ''
     if not initial_key:
       new_key = k
     elif not k:
