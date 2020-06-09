@@ -1,6 +1,6 @@
+# O(k) time| space : k is number of keys
 def flatten_dictionary(dictionary):
-    flat_diction = {}
-    return flatten("",dictionary,flat_diction, ".")
+      return flatten("",dictionary,{}, ".")
 
 def flatten(initial_key,dictionary,flat_diction,sep):
   for k,v in dictionary.items():
@@ -10,6 +10,7 @@ def flatten(initial_key,dictionary,flat_diction,sep):
       new_key = initial_key
     else:
       new_key = initial_key + sep + k
+      
     if isinstance(v, dict):
         flatten(new_key,v,flat_diction,sep)
     else:
