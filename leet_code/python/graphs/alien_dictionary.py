@@ -1,32 +1,35 @@
 # O(c) time | O(1) space: c= total length of all the words in the input list added together
+# build graph, char1->char2
+# track in_Degree, unique chars
+# remove edges, no_dep_letters
+# check len(order) and len(chars)
+
+from collections import defaultdict
 class Solution:
     def alienOrder(self, words: List[str]) -> str:
-
-        chars = {char for word in words for char in word}
         graph = defaultdict(list)
-        i_degree = defaultdict(int)
+        in_degree = defaultdict(int)
+        chars = {char for word in words for char in word}
 
         for word1, word2 in zip(words, words[1:]):
             for char1, char2 in zip(word1, word2):
                 if char1 != char2:
-                    if char2 not in graph[char1]:
-                        graph[char1].append(char2)
-                        i_degree[char2] += 1
+                    graph[char1].append(char2)
+                    in_degree[char2] += 1
                     break
             else:
                 if len(word1) > len(word2):
                     return ""
 
-        Q = [x for x in chars if i_degree[x] == 0]
-        L = []
+        no_prev_letter = [char for char in chars if in_degree[char] == 0]
+        ordered_letters = []
+        while no_prev_letter:
+            letter = no_prev_letter.pop()
+            ordered_letters.append(letter)
 
-        while Q:
-            n = Q.pop()
-            L.append(n)
+            for c in graph[letter]:
+                in_degree[c] -= 1
+                if in_degree[c] == 0:
+                    no_prev_letter.append(c)
 
-            for node in graph[n]:
-                i_degree[node] -= 1
-                if i_degree[node] == 0:
-                    Q.append(node)
-
-        return "".join(L) if len(L) == len(chars) else ""
+        return "".join(ordered_letters) if len(ordered_letters) == len(chars) else ""
