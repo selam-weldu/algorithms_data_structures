@@ -1,53 +1,44 @@
+# build graph, prereq -> courses, track indegree and totaldeps
+# fill nodepcourses
+# remove edges and add to nodepcourses if zero
+# check if cycle
+
 # O(v+e) time and space
+from collections import defaultdict, deque
 class GNode(object):
-    """  data structure represent a vertex in the graph."""
-
     def __init__(self):
-        self.inDegrees = 0
-        self.outNodes = []
+        self.out_nodes = []
+        self.in_degree = 0
 
 
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
-        from collections import defaultdict, deque
-        # key: index of node; value: GNode
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+
         graph = defaultdict(GNode)
+        total_deps = 0
+        for courses in prerequisites:
+            course, pre_req = courses[0], courses[1]
+            graph[pre_req].out_nodes.append(course)
+            graph[course].in_degree += 1
+            total_deps += 1
 
-        totalDeps = 0
-        for relation in prerequisites:
-            nextCourse, prevCourse = relation[0], relation[1]
-            graph[prevCourse].outNodes.append(nextCourse)
-            graph[nextCourse].inDegrees += 1
-            totalDeps += 1
+        no_dep_courses = []
+        for course, node in graph.items():
+            if node.in_degree == 0:
+                no_dep_courses.append(course)
 
-        # we start from courses that have no prerequisites.
-        # we could use either set, stack or queue to keep track of courses with no dependence.
-        nodepCourses = deque()
-        for index, node in graph.items():
-            if node.inDegrees == 0:
-                nodepCourses.append(index)
+        removed_edges = 0
+        while len(no_dep_courses):
+            current_course = no_dep_courses.pop()
 
-        removedEdges = 0
-        while nodepCourses:
-            # pop out course without dependency
-            course = nodepCourses.pop()
+            for next_course in graph[current_course].out_nodes:
+                graph[next_course].in_degree -= 1
+                removed_edges += 1
 
-            # remove its outgoing edges one by one
-            for nextCourse in graph[course].outNodes:
-                graph[nextCourse].inDegrees -= 1
-                removedEdges += 1
-                # while removing edges, we might discover new courses with prerequisites removed, i.e. new courses without prerequisites.
-                if graph[nextCourse].inDegrees == 0:
-                    nodepCourses.append(nextCourse)
+                if graph[next_course].in_degree == 0:
+                    no_dep_courses.append(next_course)
 
-        if removedEdges == totalDeps:
+        if removed_edges == total_deps:
             return True
         else:
-            # if there are still some edges left, then there exist some cycles
-            # Due to the dead-lock (dependencies), we cannot remove the cyclic edges
             return False
