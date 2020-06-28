@@ -1,4 +1,4 @@
-# O(n) time and space
+# O(n^2) time and space
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
         i = len(a) - 1
@@ -17,7 +17,7 @@ class Solution:
                 j -= 1
 
             sum += carry
-            result = str(sum % 2) + result
+            result = str(sum % 2) + result # string concatenation O(n)
             carry = sum // 2
 
         return result
