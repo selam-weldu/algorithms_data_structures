@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Counter</title>
+        <script>
+            let counter = 0
+            function countUp(){
+                counter += 1;
+                document.querySelector("#counter").innerHTML = counter;
+            }
+
+            function countDown(){
+                counter -= 1;
+                document.querySelector("#counter").innerHTML = counter;
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1 id="counter">0</h1>
+        <button onclick="countUp()">Increase</button>
+        <button onclick="countDown()">Decrease</button>
+    </body>
+</html>
