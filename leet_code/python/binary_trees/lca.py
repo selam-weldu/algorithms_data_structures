@@ -18,7 +18,7 @@ def lca1(self, root, p, q):
         else:
             return root
 
-
+# O(n) time | O(h) space
 def lca2(self, root, p, q):
     if not root:
         return None

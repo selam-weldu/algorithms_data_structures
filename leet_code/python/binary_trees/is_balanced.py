@@ -26,3 +26,22 @@ def check_balanced(node):
     height = max(left_result[1],right_result[1]) + 1
 
     return (is_balanced, height)
+
+###########
+
+# O(n) time | O(h) space
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        return self.get_height(root) != float("-inf")
+    
+    def get_height(self,node):
+        if not node:
+            return -1
+        
+        left = self.get_height(node.left)
+        right = self.get_height(node.right)
+        
+        if (left == float("-inf") or (right == float("-inf")) ) or abs(left - right) > 1:
+            return float("-inf")
+        else:
+            return max(left,right) + 1

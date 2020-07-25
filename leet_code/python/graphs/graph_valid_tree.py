@@ -3,7 +3,7 @@ from collections import defaultdict
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
 
-        visited = [False] * n
+        visited = set()
         graph = defaultdict(list)
         for x, y in edges:
             graph[x].append(y)
@@ -11,19 +11,16 @@ class Solution:
 
         count = 0
         for i in range(n):
-            if not visited[i]:
+            if i not in visited:
                 self.dfs(i, graph, visited)
                 count += 1
 
         """Additional Condition Check."""
-        if count == 1 and len(edges) < n:
-            return True
-        else:
-            return False
+        return count == 1 and len(edges) < n:
 
     def dfs(self, n, graph, visited):
-        if visited[n]:
+        if n in visited:
             return
-        visited[n] = True
+        visited.add(n)
         for x in graph[n]:
             self.dfs(x, graph, visited)
