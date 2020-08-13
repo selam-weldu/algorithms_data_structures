@@ -11,13 +11,12 @@ class Solution:
         count = 0
         for i in range(n):
             if not visited[i]:
-                self.dfs(i, graph, visited)
                 count += 1
+                self.dfs(i, graph, visited)
         return count
 
     def dfs(self, n, graph, visited):
-        if visited[n]:
-            return
         visited[n] = True
         for x in graph[n]:
-            self.dfs(x, graph, visited)
+            if not visited[n]:
+                self.dfs(x, graph, visited)

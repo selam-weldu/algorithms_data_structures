@@ -22,11 +22,6 @@ class Solution:
         for node in self.get_neighbors(grid, i, j):
             self.sink(grid, node[0], node[1])
 
-        # self.sink(grid, i + 1, j)
-        # self.sink(grid, i - 1, j)
-        # self.sink(grid, i, j + 1)
-        # self.sink(grid, i, j - 1)
-
     def get_neighbors(self, matrix, row, col):
         dr = [1, -1, 0, 0]
         dc = [0, 0, 1, -1]
