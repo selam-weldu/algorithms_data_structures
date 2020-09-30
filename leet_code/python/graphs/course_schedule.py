@@ -38,7 +38,5 @@ class Solution:
                 if graph[next_course].in_degree == 0:
                     no_dep_courses.append(next_course)
 
-        if removed_edges == total_deps:
-            return True
-        else:
-            return False
+        return removed_edges == total_deps:
+        
